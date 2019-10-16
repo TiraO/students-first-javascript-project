@@ -1,8 +1,12 @@
 module.exports = class Firstnamifier {
     split(fullNames) {
-        let smaransNames = fullNames[0].split(" ");
-        let ericsNames = fullNames[1].split(" ");
-        let bothFirstNames = [smaransNames[0], ericsNames[0],];
-        return bothFirstNames;
+        let allFirstNames = []
+        fullNames.forEach((fullName) => {
+            let firstName = fullName.split(" ")[0]
+
+            allFirstNames.push(firstName)
+
+        })
+        return allFirstNames;
     }
 };
