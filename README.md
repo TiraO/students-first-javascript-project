@@ -48,3 +48,5 @@ ccsm
   - `Key to show the menubar while pressed`
   - `Key to lock the screen`
   
+  
+## Bash setup Mac / Linux 
