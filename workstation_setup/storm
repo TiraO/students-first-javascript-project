@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+setxkbmap -option altwin:meta_win
+
+webstorm "$@"
+
+
