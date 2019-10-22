@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 git clone https://github.com/Bash-it/bash-it.git ~/.bash_it
-cp ./files_to_copy/bobby_pivotal.theme.bash ~/.bash_it/themes/bobby/bobby.theme.bash
-cp ./files_to_copy/.inputrc ~/
+cp ./bobby_pivotal.theme.bash ~/.bash_it/themes/bobby/bobby.theme.bash
+cp ./.inputrc ~/
 ~/.bash_it/install.sh --silent
 source ~/.bash_profile
 bash-it enable completion git
