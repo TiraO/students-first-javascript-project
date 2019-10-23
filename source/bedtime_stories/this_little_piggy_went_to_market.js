@@ -1,4 +1,4 @@
-const { Animal, Market, Species, Size, House, Foods, EventBus } = require("./bedime_stories");
+const { Animal, Market, Species, Size, House, FoodVarieties, EventBus } = require("./bedime_stories");
 let eventBus = new EventBus();
 
 eventBus.once("time", () => {
@@ -9,9 +9,9 @@ eventBus.once("time", () => {
     .resident(piggies[1])
     .build();
 
-  piggies[0].runTo(market);
-  piggies[1].runTo(home);
-  piggies[0].eat(Foods.RoastBeef);
+  piggies[0].travelTo(market);
+  piggies[1].travelTo(home);
+  piggies[0].eat(FoodVarieties.RoastBeef);
   piggies[1].eat(null);
   piggies[0].goHome("whee");
 

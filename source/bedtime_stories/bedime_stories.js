@@ -69,17 +69,36 @@ const Quality = {
   JustRight: 10
 };
 
+class Temperature {
+  constructor(name, degrees) {
+    this.name = name;
+    this.degrees = degrees;
+  }
+}
+
+const Temperatures = {
+  Cold: new Temperature("Cold", 50),
+  JustRight: new Temperature("Just Right", 130),
+  Hot: new Temperature("Hot", 211),
+};
+
 const Speed = {
   AsFastAsTheyCan: 10
 };
 
 class Animal {
-  constructor(species, size = Size.Medium, quality = Quality.Medium) {
+  constructor(species, size = Size.Medium, quality = Quality.Medium, name) {
     this.species = species;
     this.size = size;
     this.quality = quality;
     this.home = null;
     this.location = null;
+    this.hunger = 1;
+    this.name = name;
+  }
+
+  setHunger(hunger) {
+    this.hunger = hunger;
   }
 
   huff(object) {
@@ -108,8 +127,17 @@ class Animal {
     this.location = targetLocation;
   }
 
+  getDescription() {
+    if (this.name) {
+      return this.name;
+    } else {
+      return this.species;
+    }
+  }
+
   eat(food) {
-    console.log("this " + this.species + " had " + food);
+
+    console.log("this " + this.getDescription() + " had " + food.temperature.name + " " + food.variety);
   }
 }
 
@@ -145,9 +173,17 @@ class Market {
 
 }
 
-const Foods = {
-  RoastBeef: "RoastBeef"
+const FoodVarieties = {
+  RoastBeef: "Roast Beef",
+  Porridge: "Porridge",
 };
+
+class Food {
+  constructor(variety, temperature) {
+    this.variety = variety;
+    this.temperature = temperature;
+  }
+}
 
 class Location {
   constructor(name) {
@@ -264,7 +300,9 @@ eventBus.once("time", function () {
           throw new UnHuffPuffableException(house, wolf);
         }
 
-        house.owner.runTo(houses[index + 1]);
+        house.occupants.forEach((occupant) => {
+          occupant.runTo(houses[index + 1]);
+        });
       }
     });
   } catch (error) {
@@ -276,7 +314,12 @@ eventBus.once("time", function () {
   liveHappilyEverAfter(wolf)
 });
 
+
 module.exports = {
-  Size, Species, Speed, Animal, House, Market, Material, Materials,
-  Foods, Door, BuildingBuilder, Quality, UnHuffPuffableException, liveHappilyEverAfter, EventBus
+  Size,
+  Species,
+  Speed,
+  Temperatures,
+  Animal, House, Market, Material, Materials,
+  FoodVarieties, Food, Door, BuildingBuilder, Quality, UnHuffPuffableException, liveHappilyEverAfter, EventBus, Location
 };
