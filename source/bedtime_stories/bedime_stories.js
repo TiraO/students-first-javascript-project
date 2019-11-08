@@ -136,8 +136,11 @@ class Animal {
   }
 
   eat(food) {
-
-    console.log("this " + this.getDescription() + " had " + food.temperature.name + " " + food.variety);
+    if (food) {
+      console.log("this " + this.getDescription() + " had " + food.temperature.name + " " + food.variety);
+    } else {
+      console.log("this " + this.getDescription() + " had none")
+    }
   }
 }
 
