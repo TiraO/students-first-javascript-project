@@ -1,4 +1,4 @@
-const { Animal, Market, Species, Size, House, FoodVarieties, EventBus, Food, Temperatures } = require("./bedime_stories");
+const { Animal, Market, Species, Size, House, FoodVarieties, EventBus, Food, Temperatures } = require("./bedtime_stories");
 let eventBus = new EventBus();
 
 eventBus.once("time", () => {
