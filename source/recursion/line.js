@@ -1,17 +1,18 @@
 const LineSegment = require("./line_segment.js");
 
 function printLine(lineSegment) {
-    console.log(lineSegment);
+    console.log(lineSegment.content);
+    console.log("************************");
+    console.log(lineSegment.next.content);
+    console.log("************************");
+    console.log(lineSegment.next.next.content);
 }
 function makeLine(length) {
-    let content = "wood";
-    let next = null;
-    let lineSegment = new LineSegment(content, next);
-    let branchSegment;
+    let lineSegment;
     for (let i=0; i<length; i++) {
-        branchSegment = new LineSegment("birds" +i, branchSegment);
+        lineSegment = new LineSegment("birds" +i, lineSegment);
     }
-    return branchSegment;
+    return lineSegment;
 }
 
 let lineSegment = makeLine(23);
