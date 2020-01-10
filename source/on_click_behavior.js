@@ -2,7 +2,7 @@
 
 class AdventureGame {
     constructor() {
-        this.currentOptions = [{text:""}];
+        this.currentOptions = [{text:"option 1"}, {text: "option B"}, {text: "OpTIon pIneAppLe"}];
     }
 
     start(){
@@ -15,13 +15,14 @@ class AdventureGame {
         this.currentOptions.forEach((option)=>{
             let optionButton = document.createElement("button");
             optionButton.innerText = option.text;
-            optionButton.onclick = function goToOption(){
+            optionButton.onclick = function onChooseOption(){
                 // TODO
             };
             targetElement.append(optionButton);
         });
     }
 }
+
 
 function pageReady(){
     let elements = document.getElementsByTagName("button")
