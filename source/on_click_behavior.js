@@ -16,7 +16,12 @@ class AdventureGame {
             storyText: "Sam goes to the kitchen and sees a bowl of FrUiT. \n" +
                 "Option 1: Sam eats a pineapple.\n" +
                 "Option Pineapple: Sam looks for another snack.",
-            next: [{storyText: this.storyText2, next: [], buttonText: "option 1"}]
+            next: [{
+                storyText: this.storyText2,
+                next: [{storyText: this.storyText2, next: [], buttonText: "option 1"}],
+                buttonText: "option 1"
+            },
+                {storyText: this.storyText3, next: [], buttonText: "option pineapple"}]
         };
         this.currentOptions = this.options
     }
