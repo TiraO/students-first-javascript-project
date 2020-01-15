@@ -10,7 +10,8 @@ class AdventureGame {
                     buttonText: "option 1",
                     storyText: "Sam gets heartburn from eating an entire pineapple. \n" +
                         "Option 1: Sam goes to get an antacid. \n" +
-                        "Option Pineapple: Sam dances off the heartburn.",
+                        "Option Pineapple: Sam dances off the heartburn.\n" +
+                        "Option Kyle: Go home and go to sleep",
                     next: [
                         {
                             buttonText: "option 1",
@@ -28,10 +29,14 @@ class AdventureGame {
                             ],
                         },
                         {
-                            buttonText: "option pineapple",
+                            buttonText: "Option Pineapple",
                             storyText: "Sam dances off the heartburn. \n" +
                                 "Option 1: Sam dances forever. \n" +
                                 "Option Pineapple: Sam sits in an easy chair.",
+                        },
+                        {
+                            buttonText: "Option Kyle",
+                            storyText: "Kyle kills Sam and gets the best sleep he's ever had. \n" ,
                         }
                     ],
                 },
