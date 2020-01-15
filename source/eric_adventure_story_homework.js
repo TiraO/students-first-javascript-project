@@ -1,50 +1,52 @@
 class AdventureGame {
     constructor() {
-        this.storyText2 = "Sam gets heartburn from eating an entire pineapple. \n" +
-            "Option 1: Sam goes to get an antacid. \n" +
-            "Option Pineapple: Sam dances off the heartburn.";
-        this.storyText3 = "Sam finds a jar of peanutbutter. \n" +
-            "Option 1: Sam makes a peanutbutter sandwich. \n" +
-            "Option Pineapple: Sam eats the entire jar of peanutbutter.";
-        this.storyText5 = "Sam can't decide how they want to cut the sandwich. \n" +
-            "Option 1: Sam cuts it into squares. \n" +
-            "Option Pineapple: Sam cuts it into triangles.";
         this.options = {
+            buttonText: "option pineapple",
             storyText: "Sam goes to the kitchen and sees a bowl of FrUiT. \n" +
                 "Option 1: Sam eats a pineapple.\n" +
                 "Option Pineapple: Sam looks for another snack.",
-            buttonText: "option pineapple",
             next: [
                 {
-                    storyText: "Sam gets heartburn from eating an entire pineapple. \n" +
-                            "Option 1: Sam goes to get an antacid. \n" +
-                        "Option Pineapple: Sam dances off the heartburn.",
                     buttonText: "option 1",
+                    storyText: "Sam gets heartburn from eating an entire pineapple. \n" +
+                        "Option 1: Sam goes to get an antacid. \n" +
+                        "Option Pineapple: Sam dances off the heartburn.",
                     next: [
                         {
+                            buttonText: "option 1",
                             storyText: "Sam feels much better. \n" +
                                 "Option 1: Sam goes for a run. \n" +
                                 "Option Pineapple: Sam eats another pineapple",
-                            buttonText: "option 1",
                             next: [
                                 {
+                                    buttonText: "option 1",
                                     storyText: "Sam feels invigorated after the run. \n" +
                                         "Option 1: Sam cleans up around the apartment. \n" +
                                         "Option Pineapple: Sam stays outside and enjoys a day in the park.",
-                                    buttonText: "option 1",
                                     next: [],
                                 }
                             ],
+                        },
+                        {
+                            buttonText: "option pineapple",
+                            storyText: "Sam dances off the heartburn. \n" +
+                                "Option 1: Sam dances forever. \n" +
+                                "Option Pineapple: Sam sits in an easy chair.",
                         }
                     ],
                 },
                 {
-                    storyText: this.storyText3,
                     buttonText: "option pineapple",
+                    storyText: "Sam finds a jar of peanutbutter. \n" +
+                        "Option 1: Sam makes a peanutbutter sandwich. \n" +
+                        "Option Pineapple: Sam eats the entire jar of peanutbutter.",
                     next: [
                         {
-                            storyText: this.storyText5, next: [],
-                            buttonText: "option pineapple"
+                            buttonText: "option pineapple",
+                            storyText: "Sam can't decide how they want to cut the sandwich. \n" +
+                                "Option 1: Sam cuts it into squares. \n" +
+                                "Option Pineapple: Sam cuts it into triangles.",
+                            next: []
                         }
                     ],
                 }
