@@ -36,7 +36,7 @@ class AdventureGame {
                         },
                         {
                             buttonText: "Option Kyle",
-                            storyText: "Kyle kills Sam and gets the best sleep he's ever had. \n" ,
+                            storyText: "Kyle kills Sam and gets the best sleep he's ever had. \n",
                         }
                     ],
                 },
@@ -69,7 +69,16 @@ class AdventureGame {
         gameContentElement.innerHTML = null;
         let descriptionElement = document.createElement("p");
         descriptionElement.innerText = this.options.storyText;
-        gameContentElement.append(descriptionElement);
+        gameContentElement.appendChild(descriptionElement);
+        this.options.next.forEach((option) => {
+            let buttonElement = document.createElement("button");
+            buttonElement.innerText = option.buttonText;
+            gameContentElement.appendChild(buttonElement);
+            buttonElement.onclick = () => {
+                this.options = this.options.next[0];
+                this.render()
+            }
+        })
     }
 }
 
