@@ -2,12 +2,11 @@ class AdventureGame {
     constructor() {
         this.options = {
             buttonText: "option pineapple",
-            storyText: "Sam goes to the kitchen and sees a bowl of FrUiT. \n" +
-                "Option 1: Sam eats a pineapple.\n" +
-                "Option Pineapple: Sam looks for another snack.",
+            storyText: "Sam goes to the kitchen and sees a bowl of FrUiT. \n",
             next: [
                 {
                     buttonText: "option 1",
+                    optionText: "Option 1: Sam eats a pineapple.",
                     storyText: "Sam gets heartburn from eating an entire pineapple. \n" +
                         "Option 1: Sam goes to get an antacid. \n" +
                         "Option Pineapple: Sam dances off the heartburn.\n" +
@@ -42,6 +41,7 @@ class AdventureGame {
                 },
                 {
                     buttonText: "option pineapple",
+                    optionText: "Option Pineapple: Sam looks for another snack.",
                     storyText: "Sam finds a jar of peanutbutter. \n" +
                         "Option 1: Sam makes a peanutbutter sandwich. \n" +
                         "Option Pineapple: Sam eats the entire jar of peanutbutter.",
@@ -75,9 +75,12 @@ class AdventureGame {
             buttonElement.innerText = option.buttonText;
             gameContentElement.appendChild(buttonElement);
             buttonElement.onclick = () => {
-                this.options = this.options.next[0];
+                this.options = option;
                 this.render()
             }
+            let optionTextElement = document.createElement("p")
+            optionTextElement.innerText = option.optionText;
+            gameContentElement.appendChild(optionTextElement);
         })
     }
 }
