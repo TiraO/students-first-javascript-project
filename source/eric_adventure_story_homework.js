@@ -65,22 +65,11 @@ class AdventureGame {
     }
 
     render() {
-        let targetElement = document.getElementById("game-content");
-        targetElement.innerHTML = "";
-
-        let storyElement = document.createElement("p");
-        storyElement.innerText = this.currentOptions.storyText;
-        targetElement.append(storyElement);
-
-        this.currentOptions.next.forEach((option) => {
-            let optionButton = document.createElement("button");
-            optionButton.innerText = option.buttonText;
-            optionButton.onclick = () => {
-                this.currentOptions = option;
-                this.render()
-            };
-            targetElement.append(optionButton);
-        });
+        let gameContentElement = document.getElementById("game-content");
+        gameContentElement.innerHTML = null;
+        let descriptionElement = document.createElement("p");
+        descriptionElement.innerText = this.options.storyText;
+        gameContentElement.append(descriptionElement);
     }
 }
 
