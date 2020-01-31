@@ -134,8 +134,17 @@ class AdventureGame {
             optionTextInput.style = "display: block;";
             storyTextInput.style = "display: block;";
             buttonTextInput.style = "display: block;";
+            let optionLabel = document.createElement("label");
+            let storyLabel = document.createElement("label");
+            let buttonLabel = document.createElement("label");
+            optionLabel.innerText = "action long";
+            storyLabel.innerText = "outcome";
+            buttonLabel.innerText = "action short";
+            gameContentElement.appendChild(optionLabel);
             gameContentElement.appendChild(optionTextInput);
+            gameContentElement.appendChild(storyLabel);
             gameContentElement.appendChild(storyTextInput);
+            gameContentElement.appendChild(buttonLabel);
             gameContentElement.appendChild(buttonTextInput);
         }
     }
