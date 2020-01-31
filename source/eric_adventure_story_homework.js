@@ -114,7 +114,7 @@ class AdventureGame {
             let optionTextElement = document.createElement("p");
             optionTextElement.innerText = option.optionText;
             gameContentElement.appendChild(optionTextElement);
-        })
+        });
         this.options.next.forEach((option) => {
             let buttonElement = document.createElement("button");
             buttonElement.innerText = option.buttonText;
@@ -123,7 +123,21 @@ class AdventureGame {
                 this.options = option;
                 this.render()
             };
-        })
+        });
+        let addToStoryButton = document.createElement("button");
+        addToStoryButton.innerText = "Add to story";
+        gameContentElement.appendChild(addToStoryButton);
+        addToStoryButton.onclick = () => {
+            let optionTextInput = document.createElement("input");
+            let storyTextInput = document.createElement("input");
+            let buttonTextInput = document.createElement("input");
+            optionTextInput.style = "display: block;";
+            storyTextInput.style = "display: block;";
+            buttonTextInput.style = "display: block;";
+            gameContentElement.appendChild(optionTextInput);
+            gameContentElement.appendChild(storyTextInput);
+            gameContentElement.appendChild(buttonTextInput);
+        }
     }
 }
 
