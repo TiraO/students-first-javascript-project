@@ -127,6 +127,11 @@ class AdventureGame {
         let addToStoryButton = document.createElement("button");
         addToStoryButton.innerText = "Add to story";
         gameContentElement.appendChild(addToStoryButton);
+        let addInput = (labelText) => {
+            // create input, create label
+            // set text on label
+            // add both into game content element
+        }
         addToStoryButton.onclick = () => {
             let optionTextInput = document.createElement("input");
             let storyTextInput = document.createElement("input");
@@ -142,8 +147,10 @@ class AdventureGame {
             buttonLabel.innerText = "action short";
             gameContentElement.appendChild(optionLabel);
             gameContentElement.appendChild(optionTextInput);
+
             gameContentElement.appendChild(storyLabel);
             gameContentElement.appendChild(storyTextInput);
+
             gameContentElement.appendChild(buttonLabel);
             gameContentElement.appendChild(buttonTextInput);
         }
