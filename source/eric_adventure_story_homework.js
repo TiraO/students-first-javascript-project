@@ -80,10 +80,17 @@ class AdventureGame {
                             {
                                 buttonText: "option pineapple",
                                 optionText: "Option Pineapple: Sam eats the entire jar of peanutbutter.",
-                                storyText: "Sam can't decide how they want to cut the sandwich. \n" +
-                                    "Option 1: Sam cuts it into squares. \n" +
-                                    "Option Pineapple: Sam cuts it into triangles.",
-                                next: []
+                                storyText: "Sam can't decide how they want to cut the sandwich.",
+                                next: [
+                                    {
+                                        buttonText: "option 1",
+                                        optionText: "Option 1: Sam cuts it into squares.",
+                                    },
+                                    {
+                                        buttonText: "option pineapple",
+                                        optionText: "Option Pineapple: Sam cuts it into triangles.",
+                                    }
+                                ]
                             }
                         ],
                 }
