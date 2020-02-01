@@ -124,6 +124,7 @@ class AdventureGame {
                 this.render()
             };
         });
+
         let addToStoryButton = document.createElement("button");
         addToStoryButton.innerText = "Add to story";
         gameContentElement.appendChild(addToStoryButton);
