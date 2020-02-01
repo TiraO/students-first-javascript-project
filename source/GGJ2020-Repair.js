@@ -26,9 +26,7 @@ class AdventureGame {
                     optionText: "B: A sprawling city.",
                     storyText: "Once upon a time, in a sprawling city on the planet Galar, there lived a watchmaker. Day after day he sat in his shop, his wiry and weathered fingers expertly gracing faces with freshly painted numbers, a chaotic chorus of hands chattering in time as he worked. \n",
                     next: [
-                        {
-
-                        },
+                        {},
                     ]
                 }
             ]
@@ -38,39 +36,41 @@ class AdventureGame {
     }
 
     render() {
-let gameContentElement = document.getElementById("game-content");
-gameContentElement.innerHTML = null;
+        let gameContentElement = document.getElementById("game-content");
+        gameContentElement.innerHTML = null;
 
-let descriptionElement = document.createElement("p");
-descriptionElement.innerText = this.options.storyText;
-gameContentElement.appendChild(descriptionElement);
+        let descriptionElement = document.createElement("p");
+        descriptionElement.innerText = this.options.storyText;
+        gameContentElement.appendChild(descriptionElement);
 
-this.options.next.forEach((option) => {
-    let optionTextElement = document.createElement("p");
-    optionTextElement.innerText = option.optionText;
-    gameContentElement.appendChild(optionTextElement);
+        this.options.next.forEach((option) => {
+            let optionTextElement = document.createElement("p");
+            optionTextElement.innerText = option.optionText;
+            gameContentElement.appendChild(optionTextElement);
         });
-this.options.next.forEach((option) => {
-    let buttonElement = document.createElement("button");
-    buttonElement.innerText = option.buttonText;
-    gameContentElement.appendChild(buttonElement);
-    buttonElement.onclick = () => {
-        this.options = option;
-        this.render()
-    };
-    });
+        this.options.next.forEach((option) => {
+            let buttonElement = document.createElement("button");
+            buttonElement.innerText = option.buttonText;
+            gameContentElement.appendChild(buttonElement);
+            buttonElement.onclick = () => {
+                this.options = option;
+                this.render()
+            };
+        });
 
     }
 }
 
 function pageReady() {
-    let elements = document.getElementsByTagName("button");
-    console.log(elements);
-    let button = elements[0];
-    console.log("button", button);
+    let startButton = document.getElementById("start");
+    startButton.onclick = () => {
+        let introText = document.getElementById("intro");
+        introText.innerHTML = null;
 
-    let game = new AdventureGame();
-    game.render();
+        let game = new AdventureGame();
+        game.render();
+    }
+
 }
 
 window.addEventListener('load', pageReady);
