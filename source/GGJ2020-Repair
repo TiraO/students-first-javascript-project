@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="eric_adventure_story_homework.js" type="text/javascript"></script>
+</head>
+<body>
+<div>
+    <p>hello world</p>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+    <button onclick="alert('bing, i love you!')">bing!</button>
+</div>
+<div id="game-content" >loading...</div>
+</body>
+</html>

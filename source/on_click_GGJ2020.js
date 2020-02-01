@@ -1,0 +1,4 @@
+class AdventureGame {
+    constructor() {}
+
+}
