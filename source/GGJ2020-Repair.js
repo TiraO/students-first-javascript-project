@@ -135,6 +135,14 @@ class AdventureGame {
                                     optionText: null,
                                     storyText: "Years passed and the watchmaker continued her craft. Despite so many competitors, people respected her work and never questioned its quality. Then one day, a stranger arrived.\n",
                                     storyPhoto: "https://p1.pxfuel.com/preview/974/841/259/steampunk-time-clock-brass-royalty-free-thumbnail.jpg",
+                                    next: [
+                                        {
+                                            buttonText: "Next",
+                                            optionText: null,
+                                            storyText: "What happened next? You'll have to imagine on your own, because GGJ has ended and so has my time for this story.",
+                                            storyPhoto: "https://cdn.pixabay.com/photo/2017/09/29/10/11/time-2798567__340.jpg",
+                                        }
+                                    ]
                                 },
                                 {
                                     buttonText: "As you sow, so shall you reap.",
@@ -173,14 +181,14 @@ class AdventureGame {
                                         {
                                             buttonText: "The watchers protect the city.",
                                             optionText: null,
-                                            storyText: "Watchmakers have a valuable role in society. Without their production and repair, actions would go unnoticed.",
+                                            storyText: "Watchmakers have a valuable role in society. You'll have to imagine how on your own, since GGJ has ended and so has my time for this story.",
                                             storyPhoto: "https://cdn.pixabay.com/photo/2018/02/17/20/08/vintage-3160785_960_720.jpg",
                                         },
                                         {
                                             buttonText: "The watchers gather information.",
                                             optionText: null,
                                             storyText: "They're always watching.",
-                                            storyPhoto: "https://cdn.pixabay.com/photo/2018/04/04/02/12/clock-3288640_960_720.jpg",
+                                            storyPhoto: "https://p1.pxfuel.com/preview/12/769/98/watch-time-clock-eye-fantasy-blue.jpg",
                                         }
                                     ]
                                 },
