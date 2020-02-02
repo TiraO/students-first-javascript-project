@@ -3,12 +3,13 @@ class AdventureGame {
         this.options = {
             buttonText: "A",
             storyText: "Choose a scene:",
-            storyPhoto: "watch-photo \n",
+            storyPhoto: "https://cdn.pixabay.com/photo/2018/02/24/20/39/clock-3179167_960_720.jpg",
             next: [
                 {
                     buttonText: "A",
                     optionText: "A: A tiny town.",
                     storyText: "Once upon a time, in a tiny town on the outskirts of a deep wood, there lived a watchmaker. Day after day he sat in his shop, his wiry and weathered fingers expertly gracing faces with freshly painted numbers, a chaotic chorus of hands chattering in time as he worked. What was he working on?\n",
+                    storyPhoto: "https://storage.needpix.com/rsynced_images/cottage-2052212_1280.jpg",
                     next: [
                         {
                             buttonText: "A",
@@ -19,12 +20,7 @@ class AdventureGame {
                                     buttonText: "Pride cometh before the fall.",
                                     optionText: null,
                                     storyText: "Years passed and the watchmaker continued his craft. The townspeople respected his work and never questioned its quality. \n",
-                                    next: [
-                                        {
-                                            buttonText:
-                                        }
 
-                                    ]
                                 },
                                 {
                                     buttonText: "As you sow, so shall you reap.",
@@ -35,9 +31,9 @@ class AdventureGame {
                                             buttonText: "Yes.",
                                             optionText: "Return to the beginning?",
                                             storyText: "The End.",
-                                        }
+                                        },
                                         {
-                                            buttonText: "No."
+                                            buttonText: "No.",
                                             optionText: null,
                                             storyText: null,
                                         }
@@ -79,7 +75,14 @@ class AdventureGame {
         let gameContentElement = document.getElementById("game-content");
         gameContentElement.innerHTML = null;
 
-        let watchPhoto = document.getElementById("watch-photo");
+        let photoElement = document.createElement("img");
+        photoElement.src = this.options.storyPhoto;
+        photoElement.style = "width: 360px; height: 240px; margin: 0px;";
+        gameContentElement.appendChild(photoElement);
+        photoElement.onclick = (event) => {
+            alert(this.chimneyclick(event));
+            console.log(event)
+        };
 
         let descriptionElement = document.createElement("p");
         descriptionElement.innerText = this.options.storyText;
@@ -99,12 +102,16 @@ class AdventureGame {
                 this.render()
             };
         });
-        this.options.next.forEach((option) => {
-            let photoElement = document.createElement("photo");
-            photoElement.innerText = option.storyPhoto;
-            gameContentElement.appendChild(photoElement);
-        });
 
+    }
+    chimneyclick(event) {
+        // offsetX: 164 offsetY: 64
+        if (event.offsetX > 160 && event.offsetX < 170 && event.offsetY > 60 && event.offsetY < 70) {
+            return true + "Good job!"
+        }
+        else {
+            return false + "You have not clicked the chimney. Try again."
+        }
     }
 }
 
