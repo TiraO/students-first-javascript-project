@@ -8,7 +8,9 @@ class AdventureGame {
                 {
                     buttonText: "A",
                     optionText: "A: A tiny town.",
-                    storyText: "Once upon a time, in a tiny town on the outskirts of a deep wood, there lived a watchmaker. Day after day he sat in his shop, his wiry and weathered fingers expertly gracing faces with freshly painted numbers, a chaotic chorus of hands chattering in time as he worked. What was he working on?\n",
+                    storyText: "Once upon a time, in a tiny town on the outskirts of a deep wood, there lived a watchmaker." +
+                      " Day after day he sat in his shop, his wiry and weathered fingers expertly gracing faces with freshly painted numbers, " +
+                      "a chaotic chorus of hands chattering in time as he worked. What was he working on?\n",
                     storyPhoto: "https://storage.needpix.com/rsynced_images/cottage-2052212_1280.jpg",
                     next: [
                         {

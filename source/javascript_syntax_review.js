@@ -6,7 +6,7 @@ let someVariable = 4;
 // def some_function():
 //   asdasd
 
-function add(first, second){
+function add(first, second) {
   return first + second
 }
 
@@ -18,11 +18,11 @@ class Calculator {
   constructor() {
   }
 
-  add(first, second){
+  add(first, second) {
     return first + second;
   }
 
-  subtract(first, second){
+  subtract(first, second) {
     return first - second;
   }
 }
@@ -42,3 +42,15 @@ console.log(drinks.beer);
 console.log(undefined == null);
 console.log(undefined === null);
 
+// loop review
+let fruits = ["apple", "orange", "banana"];
+
+fruits.forEach(function (fruit) {
+  console.log("fruit", fruit);
+});
+
+// named functions
+let printMyName = () => {
+  console.log()
+};
+printMyName();
