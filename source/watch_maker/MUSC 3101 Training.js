@@ -413,6 +413,7 @@ class AdventureGame {
                 this.render()
             };
         });
+
     }
 }
 
