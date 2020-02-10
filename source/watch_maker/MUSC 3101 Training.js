@@ -56,7 +56,7 @@ class AdventureGame {
                                 {
                                     buttonText: "B",
                                     optionText: "B: Suggest a more specific topic for your group to research.",
-                                    storyText: "Refresh your screen to return to the beginning and choose a more specific topic.",
+                                    storyText: "Correct. It is easier to create a cohesive team document if your topic is clear, concise, and specific. Refresh your screen to return to the beginning and choose a more specific topic.",
                                     storyPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/View-refresh.svg/1024px-View-refresh.svg.png",
                                 },
                             ]
@@ -282,7 +282,7 @@ class AdventureGame {
                                                                                                                                                     next: [
                                                                                                                                                         {
                                                                                                                                                             buttonText: "Next",
-                                                                                                                                                            optionText: "Please write your sources are in MLA or APA format. Even for music examples, hyperlinks without a full citation are unacceptable.",
+                                                                                                                                                            optionText: "Please write your sources in MLA or APA format. Even for music examples, hyperlinks without a full citation are unacceptable.",
                                                                                                                                                             storyText: "You have now successfully contributed to two mission logs in Week 4. What else can you do to earn XP for the week?",
                                                                                                                                                             storyPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Own_windows_logo_xp.svg/768px-Own_windows_logo_xp.svg.png",
                                                                                                                                                             next: [
