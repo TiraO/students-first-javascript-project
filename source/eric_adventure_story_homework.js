@@ -125,15 +125,17 @@ class AdventureGame {
                 this.render()
             };
         });
-        let backButtonElement = document.createElement("button");
-        backButtonElement.innerText = "back";
-        gameContentElement.appendChild(backButtonElement);
-        backButtonElement.onclick = () => {
-            this.previous = this.history[this.history.length - 2];
-            this.history.splice(-1);
-            this.options = this.previous;
-            this.render()
-        };
+        if (this.history.length != 1) {
+            let backButtonElement = document.createElement("button");
+            backButtonElement.innerText = "back";
+            gameContentElement.appendChild(backButtonElement);
+            backButtonElement.onclick = () => {
+                this.previous = this.history[this.history.length - 2];
+                this.history.splice(-1);
+                this.options = this.previous;
+                this.render()
+            };
+        }
 
         let addToStoryButton = document.createElement("button");
         addToStoryButton.innerText = "Add to story";
