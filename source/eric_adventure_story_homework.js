@@ -95,8 +95,8 @@ class AdventureGame {
                         ],
                 }
             ],
-        }
-        ;
+        };
+        this.history = [this.options];
         this.currentOptions = this.options
     }
 
@@ -121,12 +121,19 @@ class AdventureGame {
             gameContentElement.appendChild(buttonElement);
             buttonElement.onclick = () => {
                 this.options = option;
+                this.history.push(option);
                 this.render()
             };
         });
         let backButtonElement = document.createElement("button");
         backButtonElement.innerText = "back";
-      gameContentElement.appendChild(backButtonElement);
+        gameContentElement.appendChild(backButtonElement);
+        backButtonElement.onclick = () => {
+            this.previous = this.history[this.history.length - 2];
+            this.history.splice(-1);
+            this.options = this.previous;
+            this.render()
+        };
 
         let addToStoryButton = document.createElement("button");
         addToStoryButton.innerText = "Add to story";
@@ -135,7 +142,7 @@ class AdventureGame {
             // create input, create label
             // set text on label
             // add both into game content element
-        }
+        };
         addToStoryButton.onclick = () => {
             let optionTextInput = document.createElement("input");
             let storyTextInput = document.createElement("input");
