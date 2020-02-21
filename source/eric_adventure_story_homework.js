@@ -130,9 +130,9 @@ class AdventureGame {
             backButtonElement.innerText = "back";
             gameContentElement.appendChild(backButtonElement);
             backButtonElement.onclick = () => {
-                this.previous = this.history[this.history.length - 2];
+                let previous = this.history[this.history.length - 2];
                 this.history.splice(-1);
-                this.options = this.previous;
+                this.options = previous;
                 this.render()
             };
         }
