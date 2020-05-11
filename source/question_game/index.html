@@ -6,6 +6,7 @@
     <title>MUSC 3101: Music in Global America</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="question_game_frontend.js" type="text/javascript"></script>
+    <script src="server.js"></script>
 </head>
 
 <body>
@@ -30,10 +31,19 @@
     <button id="yes-button">Yes</button>
     <button id="no-button">No</button>
 
-    <div id="submit-area">
-        <input id="secret-word"/>
-        <input id="distinguishing-question"/>
-        <input id="is-question-true-for-answer" type="checkbox"/>
+    <div id="submit-area" style="display: none">
+        <label>
+            What was your secret word?
+            <input id="secret-word"/>
+        </label>
+        <label>
+            Enter a question that distinguishes my guess from your secret word:
+            <input id="distinguishing-question"/>
+        </label>
+        <label>
+            Is the answer 'Yes' for your secret word?
+            <input id="is-question-true-for-answer" type="checkbox"/>
+        </label>
         <button id="submit-new-answer">Submit</button>
     </div>
 </div>

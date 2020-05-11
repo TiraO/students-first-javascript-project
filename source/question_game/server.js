@@ -2,10 +2,11 @@ var express = require('express');
 const QuestionGame = require("./question_game");
 var app = express();
 var bodyParser = require('body-parser');
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-const PORT = process.env.PORT || 3000;
 const game = new QuestionGame({
   id: 0,
   type: "question",
@@ -20,13 +21,19 @@ const game = new QuestionGame({
       id: 3,
       type: "answer",
       value: "Ball"
+    },
+    no: {
+      id: 4,
+      type: "answer",
+      value: "Box"
     }
   },
   no: {
     id: 2,
-    type: "question",
-    value: "Is it hard?"
+    type: "answer",
+    value: "A rather cheeky person"
   }
+
 });
 
 app.use(express.static('.'));
@@ -41,19 +48,21 @@ app.get('/questions/:questionId', function ( request, response ) {
 
 app.get('/questions/:questionId/next/:trueOrFalse', function ( request, response ) {
   let questionId = request.params.questionId;
-  let userAnswer = request.params.trueOrFalse;
+  let userAnswer = request.params.trueOrFalse === "true";
   response.setHeader('Content-Type', 'application/json');
   response.send(game.getNextQuestion(questionId, userAnswer));
 });
 
 app.post('/questions/:wrongAnswerId/addAnswer', function ( request, response ) {
   let wrongAnswerId = request.params.wrongAnswerId;
-  let { question, answer, isQuestionTrueForAnswer } = request.body;
+  let { question, answer, isQuestionTrueForAnswer } = request.body.data;
+  console.log(request.body);
+  console.log("inserting new question in place of ", wrongAnswerId, question, answer, isQuestionTrueForAnswer);
   response.setHeader('Content-Type', 'application/json');
   response.send(game.addAnswer(wrongAnswerId, question, answer, isQuestionTrueForAnswer));
 });
 
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
   console.log('App listening on port ' + PORT);
 });
