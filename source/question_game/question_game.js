@@ -33,19 +33,24 @@ module.exports = class QuestionGame {
     return this.getQuestionById(this.startingQuestion, this.getQuestionById(this.startingQuestion, answerId).parentId);
   }
 
-  addAnswer( wrongAnswerId, question, answer, isQuestionTrueForAnswer ) {
+  nextId(){
+    return Math.floor(Math.random() * 1000000);
+  }
+  addAnswer( wrongAnswerId, question, answer, isQuestionTrueForAnswer, user ) {
     let wrongAnswer = this.getQuestionById(this.startingQuestion, wrongAnswerId);
     let parentQuestion = this.getParentQuestion(wrongAnswerId);
 
     let newQuestion = {
-      id: Math.random() * 1000,
+      id: this.nextId(),
       type: "question",
-      value: question
+      value: question,
+      user
     };
     let newAnswer = {
-      id: Math.random() * 1000,
+      id: this.nextId(),
       type: "answer",
-      value: answer
+      value: answer,
+      user
     };
 
 

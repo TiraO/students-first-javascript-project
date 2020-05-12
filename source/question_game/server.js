@@ -25,7 +25,7 @@ const game = new QuestionGame({
 
 });
 
-app.use(express.static('.'));
+app.use(express.static('public'));
 
 app.get('/questions/:questionId', function ( request, response ) {
   let questionId = request.params.questionId;
@@ -43,9 +43,9 @@ app.get('/questions/:questionId/next/:trueOrFalse', function ( request, response
 
 app.post('/questions/:wrongAnswerId/addAnswer', function ( request, response ) {
   let wrongAnswerId = request.params.wrongAnswerId;
-  let { question, answer, isQuestionTrueForAnswer } = request.body.data;
+  let { question, answer, isQuestionTrueForAnswer, user } = request.body.data;
   response.setHeader('Content-Type', 'application/json');
-  response.send(game.addAnswer(wrongAnswerId, question, answer, isQuestionTrueForAnswer));
+  response.send(game.addAnswer(wrongAnswerId, question, answer, isQuestionTrueForAnswer, user));
   var startingQuestion = JSON.stringify(game.startingQuestion);
   console.log(startingQuestion)
 });

@@ -8,9 +8,12 @@ function pageReady() {
   let trueForAnswerCheckbox = document.getElementById("is-question-true-for-answer");
   let distinguishingQuestionInput = document.getElementById("distinguishing-question");
   let secretWordInput = document.getElementById("secret-word");
+  let userNameSection = document.getElementById("user-name-section");
+  let userNameInput = document.getElementById("user-name");
+  let startGameButton = document.getElementById("start-button");
   let currentQuestion;
 
-  let onFetchQuestionFromServer = function ( response ) {
+  let onFetchQuestionFromServer = function (response) {
     currentQuestion = response.data;
     if (currentQuestion.type == "answer") {
       questionTextElement.innerHTML = "I have a guess! Was this your secret word?: " + currentQuestion.value;
@@ -19,21 +22,27 @@ function pageReady() {
     }
   };
 
+  let goToBeginning = () => {
+    axios.get("http://localhost:3000/questions/" + 0).then(onFetchQuestionFromServer);
+    submitArea.style.display = "none";
+
+  };
+
   submitNewAnswerButton.onclick = () => {
     let question = distinguishingQuestionInput.value;
     let answer = secretWordInput.value;
     let isQuestionTrueForAnswer = trueForAnswerCheckbox.checked;
     axios.post("http://localhost:3000/questions/" + currentQuestion.id + "/addAnswer", {
       data: {
-        question, answer, isQuestionTrueForAnswer
+        question, answer, isQuestionTrueForAnswer, user: userNameInput.value
       }
     });
-
+    goToBeginning();
   };
 
   yesButton.onclick = () => {
     if (currentQuestion.type == "answer") {
-      axios.get("http://localhost:3000/questions/" + 0).then(onFetchQuestionFromServer);
+      goToBeginning();
     } else {
       axios.get("http://localhost:3000/questions/" + currentQuestion.id + '/next/true').then(onFetchQuestionFromServer);
     }
@@ -47,8 +56,11 @@ function pageReady() {
       axios.get("http://localhost:3000/questions/" + currentQuestion.id + '/next/false').then(onFetchQuestionFromServer);
     }
   };
-  axios.get("http://localhost:3000/questions/" + 0).then(onFetchQuestionFromServer);
-
+  startGameButton.onclick = () => {
+    userNameSection.style.display = "none";
+    $("#questions-section")[0].style.display = "initial";
+    goToBeginning();
+  }
 }
 
 window.addEventListener('load', pageReady);
