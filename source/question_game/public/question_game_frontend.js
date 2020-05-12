@@ -3,7 +3,7 @@ function pageReady() {
   let questionTextElement = document.getElementById("question-text");
   let yesButton = document.getElementById("yes-button");
   let noButton = document.getElementById("no-button");
-  let submitArea = document.getElementById("submit-area");
+  let submitArea = document.getElementById("submit-section");
   let submitNewAnswerButton = document.getElementById("submit-new-answer");
   let trueForAnswerCheckbox = document.getElementById("is-question-true-for-answer");
   let distinguishingQuestionInput = document.getElementById("distinguishing-question");
@@ -12,6 +12,7 @@ function pageReady() {
   let userNameInput = document.getElementById("user-name");
   let startGameButton = document.getElementById("start-button");
   let currentQuestion;
+  let serverUrl = window.location.href.slice(0, -1);
 
   let onFetchQuestionFromServer = function (response) {
     currentQuestion = response.data;
@@ -23,9 +24,13 @@ function pageReady() {
   };
 
   let goToBeginning = () => {
+    distinguishingQuestionInput.value = "";
+    secretWordInput.value = "";
+    trueForAnswerCheckbox.checked = null;
+
     userNameSection.style.display = "none";
     $("#questions-section")[0].style.display = "initial";
-    axios.get("http://localhost:3000/questions/" + 0).then(onFetchQuestionFromServer);
+    axios.get(serverUrl + "/questions/" + 0).then(onFetchQuestionFromServer);
     submitArea.style.display = "none";
   };
 
@@ -33,7 +38,9 @@ function pageReady() {
     let question = distinguishingQuestionInput.value;
     let answer = secretWordInput.value;
     let isQuestionTrueForAnswer = trueForAnswerCheckbox.checked;
-    axios.post("http://localhost:3000/questions/" + currentQuestion.id + "/addAnswer", {
+
+
+    axios.post(serverUrl + "/questions/" + currentQuestion.id + "/addAnswer", {
       data: {
         question, answer, isQuestionTrueForAnswer, user: userNameInput.value
       }
@@ -45,16 +52,16 @@ function pageReady() {
     if (currentQuestion.type == "answer") {
       goToBeginning();
     } else {
-      axios.get("http://localhost:3000/questions/" + currentQuestion.id + '/next/true').then(onFetchQuestionFromServer);
+      axios.get(serverUrl + "/questions/" + currentQuestion.id + '/next/true').then(onFetchQuestionFromServer);
     }
   };
   noButton.onclick = () => {
     if (currentQuestion.type == "answer") {
-      questionTextElement.innerHTML = "Okay, I give up.";
+      $("#questions-section")[0].style.display = "none";
       submitArea.style.display = "initial";
-
+      $("#distinguishing-question-label")[0].innerText = "Enter a question that distinguishes my guess (" + currentQuestion.value + ") from your secret word:"
     } else {
-      axios.get("http://localhost:3000/questions/" + currentQuestion.id + '/next/false').then(onFetchQuestionFromServer);
+      axios.get(serverUrl + "/questions/" + currentQuestion.id + '/next/false').then(onFetchQuestionFromServer);
     }
   };
   startGameButton.onclick = goToBeginning;

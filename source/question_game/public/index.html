@@ -30,39 +30,41 @@
             <span style="background-color: #FFFF00">Task: Add a word from our class into the game.</span>
         </strong>
         <p> You have a new phase of MUSC 3101. To advance to the next phase you must add a new secret word from our
-            class to this game of 20 questions. Feel free to keep playing and adding more MUSC 3101-related words. Have fun!</p>
+            class to this game of 20 questions. Feel free to keep playing and adding more MUSC 3101-related words. Have
+            fun!</p>
     </div>
 </div>
 
 <div id="game-content" class="card">
-    <div id="user-name-section" class="card-section" >
+    <div id="user-name-section" class="card-section">
         <label>
             Enter your name
             <input id="user-name"/>
             <button id="start-button" type="button" class="button">Play</button>
         </label>
     </div>
-    <div id="questions-section" class="card-section" style="display: none">
+    <div id="questions-section" class="card-section" style="display: none;">
         <p id="question-text"></p>
-        <button id="yes-button" type="button" class="button">Yes</button>
-        <button id="no-button" type="button" class="button">No</button>
-
-        <div id="submit-area" style="display: none">
-            <label>
-                What was your secret word?
-                <input id="secret-word"/>
-            </label>
-            <label>
-                Enter a question that distinguishes my guess from your secret word:
-                <input id="distinguishing-question"/>
-            </label>
-            <label>
-                Is the answer 'Yes' for your secret word?
-                <input id="is-question-true-for-answer" type="checkbox"/>
-            </label>
-            <button id="submit-new-answer" type="button" class="button">Submit</button>
-
+        <div>
+            <button id="yes-button" type="button" class="button">Yes</button>
+            <button id="no-button" type="button" class="button">No</button>
         </div>
+    </div>
+    <div id="submit-section" class="card-section" style="display: none;">
+        <p>I give up.</p>
+        <label>
+            What was your secret word?
+            <input id="secret-word" placeholder="E.g. Jazz"/>
+        </label>
+        <label id="distinguishing-question-label" for="distinguishing-question">
+            Enter a question that distinguishes my guess from your secret word:
+        </label>
+        <input id="distinguishing-question" placeholder="E.g. Is it a musical genre?"/>
+        <label>
+            Is the answer 'Yes' for your secret word?
+            <input id="is-question-true-for-answer" type="checkbox"/>
+        </label>
+        <button id="submit-new-answer" type="button" class="button">Submit</button>
     </div>
 </div>
 
