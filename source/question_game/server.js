@@ -14,19 +14,8 @@ const game = new QuestionGame({
 
   yes: {
     id: 1,
-    type: "question",
-    value: "Is it round?",
-
-    yes: {
-      id: 3,
-      type: "answer",
-      value: "Ball"
-    },
-    no: {
-      id: 4,
-      type: "answer",
-      value: "Box"
-    }
+    type: "answer",
+    value: "Hallyu",
   },
   no: {
     id: 2,
@@ -42,7 +31,6 @@ app.get('/questions/:questionId', function ( request, response ) {
   let questionId = request.params.questionId;
   response.setHeader('Content-Type', 'application/json');
   let questionResult = game.getQuestionById(game.startingQuestion, questionId);
-  console.log("questionResult", questionResult);
   response.send(JSON.stringify(questionResult));
 });
 
@@ -56,10 +44,10 @@ app.get('/questions/:questionId/next/:trueOrFalse', function ( request, response
 app.post('/questions/:wrongAnswerId/addAnswer', function ( request, response ) {
   let wrongAnswerId = request.params.wrongAnswerId;
   let { question, answer, isQuestionTrueForAnswer } = request.body.data;
-  console.log(request.body);
-  console.log("inserting new question in place of ", wrongAnswerId, question, answer, isQuestionTrueForAnswer);
   response.setHeader('Content-Type', 'application/json');
   response.send(game.addAnswer(wrongAnswerId, question, answer, isQuestionTrueForAnswer));
+  var startingQuestion = JSON.stringify(game.startingQuestion);
+  console.log(startingQuestion)
 });
 
 const PORT = process.env.PORT || 3000;
