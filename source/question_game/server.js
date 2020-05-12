@@ -40,7 +40,7 @@ const readGameFromDatabase = async () => {
 const writeGameToDatabase = async () => {
   try {
     await pool.query('BEGIN')
-    const lastId = (await pool.query("SELECT id from games order by id limit 1")).rows[0].id;
+    const lastId = (await pool.query("SELECT id from games order by id desc limit 1")).rows[0].id;
     let gameJson = JSON.stringify(game.startingQuestion);
     const insertGame = 'INSERT INTO games(id, game) VALUES ($1, $2)';
     await pool.query(insertGame, [lastId + 1, gameJson]);
