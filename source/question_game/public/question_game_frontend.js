@@ -23,9 +23,10 @@ function pageReady() {
   };
 
   let goToBeginning = () => {
+    userNameSection.style.display = "none";
+    $("#questions-section")[0].style.display = "initial";
     axios.get("http://localhost:3000/questions/" + 0).then(onFetchQuestionFromServer);
     submitArea.style.display = "none";
-
   };
 
   submitNewAnswerButton.onclick = () => {
@@ -56,11 +57,7 @@ function pageReady() {
       axios.get("http://localhost:3000/questions/" + currentQuestion.id + '/next/false').then(onFetchQuestionFromServer);
     }
   };
-  startGameButton.onclick = () => {
-    userNameSection.style.display = "none";
-    $("#questions-section")[0].style.display = "initial";
-    goToBeginning();
-  }
+  startGameButton.onclick = goToBeginning;
 }
 
 window.addEventListener('load', pageReady);
