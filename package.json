@@ -12,6 +12,6 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "node question_game/server.js"
+    "start": "node source/question_game/server.js"
   }
 }

@@ -25,7 +25,7 @@ const game = new QuestionGame({
 
 });
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/questions/:questionId', function ( request, response ) {
   let questionId = request.params.questionId;
