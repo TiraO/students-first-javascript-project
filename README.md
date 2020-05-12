@@ -50,3 +50,11 @@ ccsm
   
   
 ## Bash setup Mac / Linux 
+
+## How to get Heroku to switch to other MUSC games
+
+Go to package.json file 
+Go to the start line (currently line 15)
+Change the name of the file it shows.
+Make a commit and push. 
+Boom.
