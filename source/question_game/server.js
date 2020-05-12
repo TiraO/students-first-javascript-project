@@ -20,7 +20,7 @@ const game = new QuestionGame({
   no: {
     id: 2,
     type: "answer",
-    value: "A rather cheeky person"
+    value: "Well, what are you waiting for? Think of a word and start again."
   }
 
 });
