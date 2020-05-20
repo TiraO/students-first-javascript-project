@@ -8,7 +8,11 @@ app.listen(PORT, function () {
 });
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+    user: 'postgres',
+    host: 'localhost',
+    database: 'postgres',
+    password: 'null',
+    port: 5432,
 });
 
 let addScore = async (person, score, description) => {
@@ -16,11 +20,12 @@ let addScore = async (person, score, description) => {
         person: person,
         score: score,
         description: description,
-    }
-    await pool.query('BEGIN')
+    };
+    await pool.query('BEGIN');
+    await pool.query("INSERT INTO public.assignments (id, person, score, description) VALUES (1, 'Hamad', 50, 'Mission Log 1');")
 
-    await pool.query('COMMIT')
+    await pool.query('COMMIT');
 
 };
-
+addScore();
 
