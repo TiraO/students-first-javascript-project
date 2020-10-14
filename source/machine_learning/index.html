@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ml5.js Demo</title>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+</head>
+<body>
+<img src="IMG_6052.jpeg" alt="" id="input_img" />
+<script>
+  const image = document.getElementById("input_img");
+  ml5
+    .imageClassifier("MobileNet")
+    .then((classifier) => classifier.predict(image))
+    .then((results) => {
+      console.log(results[0].label);
+      console.log(results);
+    });
+</script>
+</body>
+</html>
