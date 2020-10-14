@@ -2,7 +2,7 @@
 
 # TODO
 - update a student score
-    /update-score @Matt 1234 "Easter egg 123"
+    @score-bot add @Matt 1234 "Easter egg 123"
 - when semester ends, I can review student history
 - sum the different assignment scores
 - see how many points they have

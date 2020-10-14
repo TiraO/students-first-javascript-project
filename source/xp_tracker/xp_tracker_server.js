@@ -2,7 +2,7 @@ let express = require('express');
 const { Pool, Client } = require('pg')
 let app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, function () {
     console.log('App listening on port ' + PORT);
 });
