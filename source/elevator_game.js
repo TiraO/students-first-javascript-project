@@ -1,3 +1,7 @@
+/*
+Next step is to move load balancing into the chooseElevator function and actually write isEquallyGood
+ */
+
 let a = {
 
   init: function (elevators, floors) {
