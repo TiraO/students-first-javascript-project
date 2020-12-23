@@ -1,7 +1,15 @@
 class Snowflake {
-  constructor(graphics) {
-    this.graphics = graphics;
-    this.graphics.lineStyle(2, 0xFFFFFF, 0.8);
+  constructor(stage) {
+    this.branches = []
+    let branchCount = 0;
+    while (branchCount < 6) {
+      let branch = new PIXI.Graphics();
+      branch.rotation = branchCount * 2 * Math.PI / 6;
+      branch.lineStyle(2, 0xFFFFFF, 0.8);
+      this.branches.push(branch)
+      stage.addChild(branch);
+      branchCount = branchCount + 1
+    }
     this.points = [];
   }
 
@@ -11,22 +19,21 @@ class Snowflake {
     let previousPointIndex = (this.points.length - 2) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
     let previousPoint = this.points[previousPointIndex];
-    this.graphics.moveTo(previousPoint.x, previousPoint.y);
-    this.graphics.lineTo(point.x, point.y);
+    this.branches[0].moveTo(previousPoint.x, previousPoint.y);
+    this.branches[0].lineTo(point.x, point.y);
   }
 
   finishSnowflake() {
     console.log("finishing snowflake");
-    this.graphics.clear();
-    this.graphics.lineStyle(4, 0xFFFFFF, 0.8);
-    this.graphics.beginFill(0xFFFFFF, 0.9);
-    this.graphics.moveTo(this.points[0].x, this.points[0].y);
-    this.points.forEach((point)=>{
-      this.graphics.lineTo(point.x, point.y);
+    this.branches[0].clear();
+    this.branches[0].lineStyle(4, 0xFFFFFF, 0.8);
+    this.branches[0].beginFill(0xFFFFFF, 0.9);
+    this.branches[0].moveTo(this.points[0].x, this.points[0].y);
+    this.points.forEach((point) => {
+      this.branches[0].lineTo(point.x, point.y);
     })
-    this.graphics.lineTo(this.points[0].x, this.points[0].y);
-    this.graphics.closePath();
-    this.graphics.endFill();
+    this.branches[0].closePath();
+    this.branches[0].endFill();
   }
 
 
@@ -38,12 +45,8 @@ let initialize = () => {
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
   document.body.appendChild(app.view);
-  const graphics = new PIXI.Graphics();
+  let snowflake = new Snowflake(app.stage);
 
-  app.stage.addChild(graphics);
-  graphics.lineStyle(2, 0xFEEB77, 1);
-  graphics.lineTo(150, 100);
-  let snowflake = new Snowflake(graphics);
   let previousClickTime = new Date().valueOf();
   let isDoubleClick = () => {
     let now = new Date().valueOf();
