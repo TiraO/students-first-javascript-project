@@ -49,21 +49,34 @@ let initialize = () => {
       climber.skeleton.findSlot("head").bone.scaleY = 0.5
       let upperArm = climber.skeleton.findSlot("front-upper-arm");
       upperArm.bone.rotation = -90;
-      let canvasClick = event.data.global;
-      console.log(canvasClick, "canvasClick")
+      let mouse = event.data.global;
+      console.log(mouse, "canvasClick")
       let upperArmContainer = climber.slotContainers[climber.skeleton.findSlotIndex("front-upper-arm")];
-      let shoulderPosition = upperArmContainer.getGlobalPosition({x: 0, y: 0});
+      let shoulder = upperArmContainer.getGlobalPosition({x: 0, y: 0});
       console.log("upperArmContainer.getGlobalPosition({x: 0, y: 0})",)
       let shoulderOffset = {
-        x: canvasClick.x - shoulderPosition.x,
-        y: canvasClick.y - shoulderPosition.y
+        x: mouse.x - shoulder.x,
+        y: mouse.y - shoulder.y
       }
-      let shoulderAngleRadians = Math.atan2(shoulderOffset.y, shoulderOffset.x);
-      upperArm.bone.rotation = 250 - (shoulderAngleRadians * 180 / Math.PI);
+      // !! spine has backwards angles.
+      let shoulderAngleRadians = Math.atan2(shoulderOffset.y, shoulderOffset.x) - 4.36;
+      let armLength = 90;
+      upperArm.bone.rotation = - 1 *(shoulderAngleRadians * 180 / Math.PI);
+      let shoulderToTarget = distance(mouse, shoulder);
+      if(shoulderToTarget < armLength){
+        let upperArmLength = armLength / 2;
+        let armBendRadians = Math.acos((shoulderToTarget / 2) / upperArmLength);
+        upperArm.bone.rotation += 2* radiansToRotation(armBendRadians);
+        upperArm.bone.children[0].rotation = -2 * radiansToRotation(armBendRadians)
+      }
     });
   }
 
 }
+let distance = (pointA, pointB) =>{
+  return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
+}
+let radiansToRotation = (radians) => -1 * radians * 180 / Math.PI
 
 
 window.addEventListener('load', initialize);
