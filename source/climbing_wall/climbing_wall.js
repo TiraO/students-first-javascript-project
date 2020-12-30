@@ -17,15 +17,27 @@ class ClimberControls {
     this.selectableLimbs = ["rear-upper-arm", "front-upper-arm", "front-thigh", "rear-thigh"];
   }
 
+  clickLimb(limbName) {
+    if (this.selectedLimb) {
+      this.deselectLimb();
+    } else {
+      this.selectLimb(limbName);
+    }
+  }
+
+  clickOff() {
+    this.deselectLimb();
+  }
+
   selectLimb(limbName) {
     this.selectedLimb = limbName;
   }
 
-  deselectLimb(){
+  deselectLimb() {
     this.selectedLimb = null;
   }
 
-  moveLimb(mouse){
+  moveLimb(mouse) {
     let armContainer = climber.slotContainers[climber.skeleton.findSlotIndex(this.selectedLimb)];
     let shoulder = armContainer.getGlobalPosition({x: 0, y: 0});
     let shoulderOffset = {
@@ -91,7 +103,7 @@ let initialize = () => {
     app.stage.on('pointermove', (event) => {
       let mouse = event.data.global;
 
-      if(climberControls.selectedLimb){
+      if (climberControls.selectedLimb) {
         climberControls.moveLimb(mouse);
       }
     });
@@ -100,22 +112,38 @@ let initialize = () => {
       let mouse = event.data.global;
       let hitLimb = getHitLimb(climber, mouse);
       if (hitLimb) {
-        climberControls.selectLimb(hitLimb)
+        climberControls.clickLimb(hitLimb)
       } else {
-        climberControls.deselectLimb();
+        climberControls.clickOff();
       }
     });
   }
 
 
 }
+let isInBounds = (point, container) => {
+  let localRect = container.getLocalBounds();
+  container.getLocalPosition()
+}
+let getHitLimb = (climber, point) => {
+  let sortedContainers = [...climber.slotContainers];
+  sortedContainers.sort((first, second) => {
+    let distanceDifference = distance(first.getGlobalPosition({x: 0, y: 0}), point)
+      - distance(second.getGlobalPosition({x: 0, y: 0}), point);
+    if (distanceDifference > 0) {
+      return 1;
+    } else if (distanceDifference == 0) {
+      return 0;
+    } else {
+      return -1;
+    }
+  });
 
-let getHitLimb = (climber, point) =>{
-  let hitSlotIndex = climber.slotContainers.findIndex((container)=>{
-    return distance(container.getGlobalPosition({x: 0, y: 0}), point) < 30;
-  })
+  let hitSlotIndex = climber.slotContainers.findIndex((container) => {
+    return container == sortedContainers[0];
+  });
 
-  if(hitSlotIndex > -1) {
+  if (hitSlotIndex > -1) {
     let slotName = climber.skeleton.slots[hitSlotIndex].data.name;
     console.log("hit ", slotName)
     return slotName;
