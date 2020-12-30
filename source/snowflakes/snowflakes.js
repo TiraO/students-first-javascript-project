@@ -2,12 +2,15 @@ class Snowflake {
   constructor(stage) {
     this.branches = []
     let branchCount = 0;
-    while (branchCount < 6) {
+    while (branchCount < 12) {
       let branch = new PIXI.Graphics();
       branch.position.x = 400;
       branch.position.y = 300;
-      branch.rotation = branchCount * 2 * Math.PI / 6;
+      branch.rotation = branchCount * 2 * Math.PI / 12;
       branch.lineStyle(2, 0xFFFFFF, 0.8);
+      if (branchCount % 2 == 1) {
+        branch.scale.x = -1;
+      }
       this.branches.push(branch)
       stage.addChild(branch);
       branchCount = branchCount + 1
@@ -22,7 +25,7 @@ class Snowflake {
     console.log("previousPointIndex", previousPointIndex)
     let previousPoint = this.points[previousPointIndex];
     let branchIndex = 0;
-    while (branchIndex <6) {
+    while (branchIndex < this.branches.length) {
       this.branches[branchIndex].moveTo(previousPoint.x, previousPoint.y);
       this.branches[branchIndex].lineTo(point.x, point.y);
       branchIndex = branchIndex + 1;
@@ -33,7 +36,7 @@ class Snowflake {
   finishSnowflake() {
     console.log("finishing snowflake");
     let branchIndex = 0
-    while (branchIndex < 6) {
+    while (branchIndex < this.branches.length) {
       this.branches[branchIndex].clear();
       this.branches[branchIndex].lineStyle(4, 0xFFFFFF, 0.8);
       this.branches[branchIndex].beginFill(0xFFFFFF, 0.9);
