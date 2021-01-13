@@ -51,6 +51,28 @@ class Snowflake {
 
   }
 
+  renderFrame = ()=> {
+    let velocity = 600 / 4
+    this.branches.forEach((branch)=>{
+      branch.position.y += velocity;
+    })
+  }
+
+  shrink = ()=> {
+    this.branches.forEach((branch)=>{
+      branch.scale.x *= 1/8
+      branch.scale.y *= 1/8
+    })
+  }
+
+  moveToTop = ()=> {
+    let snowflakeX = Math.random() * 800
+    this.branches.forEach((branch)=>{
+      branch.position.y = 0
+      branch.position.x = snowflakeX
+    })
+  }
+
 
 }
 
@@ -73,6 +95,9 @@ let initialize = () => {
   app.view.addEventListener("mousedown", (event) => {
     if (isDoubleClick()) {
       snowflake.finishSnowflake(event);
+      snowflake.shrink()
+      snowflake.moveToTop()
+      setInterval(snowflake.renderFrame, 1000 / 20);
     } else {
       snowflake.addLine(event);
     }
