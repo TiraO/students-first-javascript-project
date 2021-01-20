@@ -1,3 +1,5 @@
+let frameRate = 60
+
 class Snowflake {
   constructor(stage) {
     this.branches = []
@@ -54,7 +56,7 @@ class Snowflake {
   renderFrame = ()=> {
     let velocity = 600 / 4
     this.branches.forEach((branch)=>{
-      branch.position.y += velocity;
+      branch.position.y += velocity / frameRate;
     })
   }
 
@@ -97,7 +99,7 @@ let initialize = () => {
       snowflake.finishSnowflake(event);
       snowflake.shrink()
       snowflake.moveToTop()
-      setInterval(snowflake.renderFrame, 1000 / 20);
+      setInterval(snowflake.renderFrame, 1000 / frameRate);
     } else {
       snowflake.addLine(event);
     }
