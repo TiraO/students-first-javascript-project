@@ -2,6 +2,7 @@ let frameRate = 60
 
 class Snowflake {
   constructor(stage) {
+    this.isFinished = false
     this.branches = []
     let branchCount = 0;
     while (branchCount < 12) {
@@ -50,26 +51,26 @@ class Snowflake {
       this.branches[branchIndex].endFill();
       branchIndex = branchIndex + 1;
     }
-
+    this.isFinished = true
   }
 
-  renderFrame = ()=> {
+  renderFrame = () => {
     let velocity = 600 / 4
-    this.branches.forEach((branch)=>{
+    this.branches.forEach((branch) => {
       branch.position.y += velocity / frameRate;
     })
   }
 
-  shrink = ()=> {
-    this.branches.forEach((branch)=>{
-      branch.scale.x *= 1/8
-      branch.scale.y *= 1/8
+  shrink = () => {
+    this.branches.forEach((branch) => {
+      branch.scale.x *= 1 / 8
+      branch.scale.y *= 1 / 8
     })
   }
 
-  moveToTop = ()=> {
+  moveToTop = () => {
     let snowflakeX = Math.random() * 800
-    this.branches.forEach((branch)=>{
+    this.branches.forEach((branch) => {
       branch.position.y = 0
       branch.position.x = snowflakeX
     })
@@ -97,6 +98,7 @@ let initialize = () => {
   app.view.addEventListener("mousedown", (event) => {
     if (isDoubleClick()) {
       snowflake.finishSnowflake(event);
+    } else if (snowflake.isFinished) {
       snowflake.shrink()
       snowflake.moveToTop()
       setInterval(snowflake.renderFrame, 1000 / frameRate);
