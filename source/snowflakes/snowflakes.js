@@ -56,9 +56,14 @@ class Snowflake {
 
   renderFrame = () => {
     let velocity = 600 / 4
-    this.branches.forEach((branch) => {
-      branch.position.y += velocity / frameRate;
-    })
+    let snowflakeAtBottom = this.branches[0].position.y >= 600
+    if (snowflakeAtBottom) {
+      this.moveToTop();
+    } else {
+      this.branches.forEach((branch) => {
+        branch.position.y += velocity / frameRate;
+      })
+    }
   }
 
   shrink = () => {
