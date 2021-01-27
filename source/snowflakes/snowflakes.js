@@ -2,6 +2,7 @@ let frameRate = 60
 
 class Snowflake {
   constructor(stage) {
+    this.stage = stage
     this.isFinished = false
     this.snowflakeContainer = new PIXI.Container();
     stage.addChild(this.snowflakeContainer);
@@ -9,8 +10,8 @@ class Snowflake {
     let branchCount = 0;
     while (branchCount < 12) {
       let branch = new PIXI.Graphics();
-      branch.position.x = 400;
-      branch.position.y = 300;
+      branch.position.x = stage.width/2;
+      branch.position.y = stage.height/2;
       branch.rotation = branchCount * 2 * Math.PI / 12;
       branch.lineStyle(2, 0xFFFFFF, 0.8);
       if (branchCount % 2 == 1) {
@@ -24,7 +25,7 @@ class Snowflake {
   }
 
   addLine(event) {
-    let point = {x: event.offsetX - 400, y: event.offsetY - 300};
+    let point = {x: event.offsetX - this.stage.width/2, y: event.offsetY - this.stage.height/2};
     this.points.push(point);
     let previousPointIndex = (this.points.length - 2) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
@@ -57,8 +58,8 @@ class Snowflake {
   }
 
   renderFrame = () => {
-    let velocity = 600 / 4
-    let snowflakeAtBottom = this.snowflakeContainer.position.y >= 600
+    let velocity = this.stage.height / 4
+    let snowflakeAtBottom = this.snowflakeContainer.position.y >= this.stage.height
     if (snowflakeAtBottom) {
       this.moveToTop();
     } else {
@@ -72,7 +73,7 @@ class Snowflake {
   }
 
   moveToTop = () => {
-    let snowflakeX = Math.random() * 800
+    let snowflakeX = Math.random() * this.stage.width
     this.snowflakeContainer.position.y = 0
     this.snowflakeContainer.position.x = snowflakeX
   }
@@ -81,7 +82,7 @@ class Snowflake {
 }
 
 let initialize = () => {
-  const app = new PIXI.Application({antialias: true});
+  const app = new PIXI.Application({antialias: true, width: window.innerWidth, height: window.innerHeight});
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
