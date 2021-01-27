@@ -3,6 +3,8 @@ let frameRate = 60
 class Snowflake {
   constructor(stage) {
     this.isFinished = false
+    this.snowflakeContainer = new PIXI.Container();
+    stage.addChild(this.snowflakeContainer);
     this.branches = []
     let branchCount = 0;
     while (branchCount < 12) {
@@ -15,7 +17,7 @@ class Snowflake {
         branch.scale.x = -1;
       }
       this.branches.push(branch)
-      stage.addChild(branch);
+      this.snowflakeContainer.addChild(branch);
       branchCount = branchCount + 1
     }
     this.points = [];
@@ -56,29 +58,23 @@ class Snowflake {
 
   renderFrame = () => {
     let velocity = 600 / 4
-    let snowflakeAtBottom = this.branches[0].position.y >= 600
+    let snowflakeAtBottom = this.snowflakeContainer.position.y >= 600
     if (snowflakeAtBottom) {
       this.moveToTop();
     } else {
-      this.branches.forEach((branch) => {
-        branch.position.y += velocity / frameRate;
-      })
+      this.snowflakeContainer.position.y += velocity / frameRate;
     }
   }
 
   shrink = () => {
-    this.branches.forEach((branch) => {
-      branch.scale.x *= 1 / 8
-      branch.scale.y *= 1 / 8
-    })
+    this.snowflakeContainer.scale.x *= 1 / 8
+    this.snowflakeContainer.scale.y *= 1 / 8
   }
 
   moveToTop = () => {
     let snowflakeX = Math.random() * 800
-    this.branches.forEach((branch) => {
-      branch.position.y = 0
-      branch.position.x = snowflakeX
-    })
+    this.snowflakeContainer.position.y = 0
+    this.snowflakeContainer.position.x = snowflakeX
   }
 
 
