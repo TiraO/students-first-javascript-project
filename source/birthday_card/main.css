@@ -1,0 +1,50 @@
+
+.icon {
+    font-size: 2em;
+    margin-right: 5px;
+}
+
+body {
+    font-size: 14px;
+    background-color: #c7e9ff;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+label {
+    line-height: initial;
+    vertical-align: bottom;
+}
+
+.top-bar, .top-bar ul {
+    color: black;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.popover {
+    position: absolute;
+    width: 100%;
+    top: 60px;
+}
+
+.popover-inner {
+    position: relative;
+    max-width: 850px
+}
+
+.page-content {
+    /*background-color: white;*/
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 850px;
+    border: none;
+}
+
+.card {
+    padding: 2rem;
+}
