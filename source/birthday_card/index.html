@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Snowflakes</title>
+    <title>Birthday Card Maker</title>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -25,6 +25,8 @@
     <script src="../../node_modules/pixi-spine/bin/pixi-spine.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"
             type="text/javascript"></script>
+    <link rel="stylesheet" href="main.css">
+
     <script src="birthday.js" type="text/javascript"></script>
 </head>
 <body>
@@ -69,7 +71,11 @@
                 <span id="date-text">Today</span>
             </label>
 
-            <button id="make-card-button" type="button" class="button primary float-right">See your card!</button>
+            <button id="make-card-button" type="button" class="button primary float-right"
+                    onclick="$('#event-form').show()">See your card!
+            </button>
+
+            <canvas id="birthday-card-canvas"></canvas>
         </div>
     </div>
 </div>

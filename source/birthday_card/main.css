@@ -33,7 +33,8 @@ label {
 
 .popover-inner {
     position: relative;
-    max-width: 850px
+    max-width: 850px;
+    box-shadow: 5px 10px 4px #2222;
 }
 
 .page-content {
