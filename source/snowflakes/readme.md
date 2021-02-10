@@ -7,3 +7,6 @@
 5. Let user create more snowflakes
 6. ~~Loop snowflake falling~~
 7. ~~make a finished snowflake be one object~~
+8. Deploy it online
+9. should velocity really be based on screen height?
+10. don't draw an extra line when you're finishing the snowflake?
