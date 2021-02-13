@@ -1,1 +1,1 @@
-web: node source/question_game/server.js
+web: node ./source/question_game/server.js

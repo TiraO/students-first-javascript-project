@@ -1,1 +1,1 @@
-web: node source/snowflakes/server.js
+web: node ./source/snowflakes/server.js
