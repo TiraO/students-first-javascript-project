@@ -5,7 +5,6 @@
 - install webstorm
 - install yarn
 
-
 ```bash
 # in directory where you want the project to live, download this via git:
 git clone https://github.com/TiraO/students-first-javascript-project.git
