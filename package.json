@@ -9,10 +9,13 @@
     "chai": "^4.2.0",
     "express": "^4.17.1",
     "mocha": "^6.2.1",
+    "noble": "^1.6.0",
     "pg": "^8.1.0",
     "pixi-spine": "2.0.5",
     "pixi.js": "^5.3.6",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "sphero": "^0.9.2",
+    "bluetooth-hci-socket": "0.4.4"
   },
   "scripts": {
     "start": "node source/question_game/server.js"
