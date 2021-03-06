@@ -100,6 +100,8 @@ let initialize = () => {
     console.log(timeSinceLastClick);
     return timeSinceLastClick < 250;
   }
+
+
   app.view.addEventListener("mousedown", (event) => {
     if (isDoubleClick()) {
       snowflake.finishSnowflake(event);
@@ -107,11 +109,11 @@ let initialize = () => {
       snowflake.shrink()
       snowflake.moveToTop()
       setInterval(snowflake.renderFrame, 1000 / frameRate);
+      snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
     } else {
       snowflake.addLine(event);
     }
   });
-
 
 }
 
