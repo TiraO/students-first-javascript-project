@@ -24,6 +24,7 @@ class Snowflake {
     this.points = [];
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
+    this.velocity = this.stageHeight / 8 * (1 + 1 * Math.random() - .4)
   }
 
   addLine(event) {
@@ -60,12 +61,11 @@ class Snowflake {
   }
 
   renderFrame = () => {
-    let velocity = this.stageHeight / 8
     let snowflakeAtBottom = this.snowflakeContainer.position.y >= this.stageHeight
     if (snowflakeAtBottom) {
       this.moveToTop();
     } else {
-      this.snowflakeContainer.position.y += velocity / frameRate;
+      this.snowflakeContainer.position.y += this.velocity / frameRate;
       this.snowflakeContainer.position.x += Math.sin(this.snowflakeContainer.position.y / 50) * (Math.random() * 50) / frameRate
     }
   }
