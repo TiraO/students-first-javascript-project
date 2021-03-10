@@ -111,6 +111,8 @@ let initialize = () => {
       snowflake.moveToTop()
       setInterval(snowflake.renderFrame, 1000 / frameRate);
       snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
+      let instructions = document.getElementsByClassName("instructions")[0]
+      instructions.style="display:none"
     } else {
       snowflake.addLine(event);
     }
