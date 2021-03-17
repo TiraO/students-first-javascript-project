@@ -38,10 +38,20 @@ function isCollision() {
         return false
     }
 }
+
+let locations = []
+
 async function onCollision() {
-    await speak("Collision", false);
+    locations.push(getLocation())
     setMainLed(getDistinctColor())
-    let catEvasion = 90 + Math.floor(Math.random() * 18) * 10
-    setHeading(getHeading() + catEvasion)
+    let nearPreviousLocation = false
+    if(nearPreviousLocation) {
+        setHeading(getHeading() - 90)
+        await speak("Left", false);
+    } else{
+        setHeading(getHeading() + 90)
+        await speak("right", false);
+    }
     setSpeed(150)
+
 }
