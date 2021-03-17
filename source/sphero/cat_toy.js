@@ -20,8 +20,7 @@ async function startProgram() {
     //     await roll(randomAngle, 30, 2)
     // }
     while(true) {
-        let acceleration = Math.sqrt((getAcceleration().x ** 2) + (getAcceleration().y ** 2) + (getAcceleration().z ** 2))
-        if(acceleration > 1) {
+        if(isCollision()) {
             await onCollision();
             await delay(2)
         } else{
@@ -29,13 +28,20 @@ async function startProgram() {
         }
     }
 }
-
+function isCollision() {
+    let acceleration = Math.sqrt((getAcceleration().x ** 2) + (getAcceleration().y ** 2) + (getAcceleration().z ** 2))
+    if(acceleration > 2) {
+        return true
+    } else if(Math.sqrt((getVelocity().x ** 2) + (getVelocity().y ** 2))<10) {
+        return true
+    } else {
+        return false
+    }
+}
 async function onCollision() {
     await speak("Collision", false);
     setMainLed(getDistinctColor())
     let catEvasion = 90 + Math.floor(Math.random() * 18) * 10
     setHeading(getHeading() + catEvasion)
-    setSpeed(20)
+    setSpeed(150)
 }
-
-// registerEvent(EventType.onCollision, onCollision);
