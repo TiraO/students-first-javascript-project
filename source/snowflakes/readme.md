@@ -21,6 +21,6 @@
 19. make it work on mobile
 20. add background selection
 21. canvas axis mirrored to first click of snowflake
-22. stop snowflakes from "popping" in an out    
+22. ~~stop snowflakes from "popping" in an out~~   
 107. make multiplayer snowflake deathmatch version a paid subscription
 

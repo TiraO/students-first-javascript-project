@@ -47,6 +47,22 @@ class Snowflake {
 
   }
 
+  calculateSize() {
+
+    /*
+    this.points.forEach(if (this.point size > biggestPoint) {
+    biggestPoint = this.point
+    }
+    )
+    */
+
+    let biggestPoint = {
+      x: 0,
+      y: 0
+    }
+  }
+
+
   finishSnowflake() {
     console.log("finishing snowflake");
     let branchIndex = 0
