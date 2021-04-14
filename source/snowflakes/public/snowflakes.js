@@ -1,4 +1,5 @@
 let frameRate = 60
+let scaleFactor = 1 / 8
 
 class Snowflake {
   constructor(stage, stageWidth, stageHeight) {
@@ -25,6 +26,10 @@ class Snowflake {
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
     this.velocity = this.stageHeight / 8 * (1 + 1 * Math.random() - .4)
+    this.snowflakeSize = {
+      height: this.stageHeight * scaleFactor,
+      width: this.stageWidth * scaleFactor
+    }
   }
 
   addLine(event) {
@@ -61,7 +66,7 @@ class Snowflake {
   }
 
   renderFrame = () => {
-    let snowflakeAtBottom = this.snowflakeContainer.position.y >= this.stageHeight
+    let snowflakeAtBottom = this.snowflakeContainer.position.y >= this.stageHeight + this.snowflakeSize.height
     if (snowflakeAtBottom) {
       this.moveToTop();
     } else {
@@ -71,13 +76,13 @@ class Snowflake {
   }
 
   shrink = () => {
-    this.snowflakeContainer.scale.x *= 1 / 8
-    this.snowflakeContainer.scale.y *= 1 / 8
+    this.snowflakeContainer.scale.x *= scaleFactor
+    this.snowflakeContainer.scale.y *= scaleFactor
   }
 
   moveToTop = () => {
     let snowflakeX = Math.random() * this.stageWidth
-    this.snowflakeContainer.position.y = 0
+    this.snowflakeContainer.position.y = -1 * this.snowflakeSize.height
     this.snowflakeContainer.position.x = snowflakeX
   }
 
