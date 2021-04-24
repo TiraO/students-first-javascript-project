@@ -25,11 +25,11 @@ class Snowflake {
     this.points = [];
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
-    this.velocity = this.stageHeight / 8 * (1 + 1 * Math.random() - .4)
     this.snowflakeSize = {
       height: this.stageHeight * scaleFactor,
       width: this.stageWidth * scaleFactor
     }
+    this.velocity = null
   }
 
   addLine(event) {
@@ -48,18 +48,18 @@ class Snowflake {
   }
 
   calculateSize() {
-
-    /*
-    this.points.forEach(if (this.point size > biggestPoint) {
-    biggestPoint = this.point
-    }
-    )
-    */
-
     let biggestPoint = {
       x: 0,
       y: 0
     }
+    this.points.forEach((point) => {
+      if ((point.x**2 + point.y**2) > (biggestPoint.x**2 + biggestPoint.y**2))
+      {
+        biggestPoint = point
+      }
+    })
+    let snowflakeSize = Math.sqrt(biggestPoint.x**2 + biggestPoint.y**2) * 2
+    return snowflakeSize
   }
 
 
@@ -78,6 +78,7 @@ class Snowflake {
       this.branches[branchIndex].endFill();
       branchIndex = branchIndex + 1;
     }
+    this.velocity = Math.sqrt(this.calculateSize()) * 4
     this.isFinished = true
   }
 
