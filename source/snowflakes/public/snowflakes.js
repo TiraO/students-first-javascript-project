@@ -33,7 +33,7 @@ class Snowflake {
   }
 
   addLine(event) {
-    let point = {x: event.offsetX - this.stageWidth/2, y: event.offsetY - this.stageHeight/2};
+    let point = {x: event.x - this.stageWidth/2, y: event.y - this.stageHeight/2};
     this.points.push(point);
     let previousPointIndex = (this.points.length - 2) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
@@ -124,8 +124,7 @@ let initialize = () => {
     return timeSinceLastClick < 250;
   }
 
-
-  app.view.addEventListener("mousedown", (event) => {
+  let onTap = (event) => {
     if (isDoubleClick()) {
       snowflake.finishSnowflake(event);
     } else if (snowflake.isFinished) {
@@ -137,9 +136,17 @@ let initialize = () => {
       instructions.style="display:none"
     } else {
       snowflake.addLine(event);
+      console.log(event)
     }
+  }
+  app.view.addEventListener("mousedown", (event)=>{
+    let point = {x: event.offsetX, y: event.offsetY}
+    onTap(point);
   });
-
+  app.view.addEventListener("touchstart", (event)=>{
+    let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
+    onTap(point);
+  })
 }
 
 
