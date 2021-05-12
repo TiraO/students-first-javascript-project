@@ -88,7 +88,10 @@ class Snowflake {
       this.moveToTop();
     } else {
       this.snowflakeContainer.position.y += this.velocity / frameRate;
-      this.snowflakeContainer.position.x += Math.sin(this.snowflakeContainer.position.y / 50) * (Math.random() * 50) / frameRate
+      this.snowflakeContainer.position.x +=
+          this.calculateSize() / 10
+          * Math.random() / frameRate
+          * Math.sin(this.snowflakeContainer.position.y / 50)
     }
   }
 
