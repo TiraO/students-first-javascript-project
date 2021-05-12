@@ -4,3 +4,7 @@
     font-size: xx-large;
     padding-left: 20px;
 }
+.buttons{
+    z-index: 100;
+    position: absolute;
+}

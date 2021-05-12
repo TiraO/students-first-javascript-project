@@ -78,8 +78,6 @@ class Snowflake {
       this.branches[branchIndex].endFill();
       branchIndex = branchIndex + 1;
     }
-    this.velocity = Math.sqrt(this.calculateSize()) * 4
-    this.isFinished = true
   }
 
   renderFrame = () => {
@@ -131,12 +129,7 @@ let initialize = () => {
     if (isDoubleClick()) {
       snowflake.finishSnowflake(event);
     } else if (snowflake.isFinished) {
-      snowflake.shrink()
-      snowflake.moveToTop()
-      setInterval(snowflake.renderFrame, 1000 / frameRate);
-      snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
-      let instructions = document.getElementsByClassName("instructions")[0]
-      instructions.style="display:none"
+
     } else {
       snowflake.addLine(event);
       console.log(event)
@@ -150,7 +143,18 @@ let initialize = () => {
     let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
     onTap(point);
   })
+  window.onGoButtonPress = ()=> {
+    snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4
+    snowflake.isFinished = true
+    snowflake.shrink()
+    snowflake.moveToTop()
+    setInterval(snowflake.renderFrame, 1000 / frameRate);
+    snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
+    let instructions = document.getElementsByClassName("instructions")[0]
+    instructions.style="display:none"
+  }
 }
+
 
 
 window.addEventListener('load', initialize);
