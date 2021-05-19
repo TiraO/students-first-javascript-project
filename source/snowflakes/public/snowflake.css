@@ -6,5 +6,21 @@
 }
 .buttons{
     z-index: 100;
-    position: absolute;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+button {
+    font-size: 50px;
+    padding: 10px 20px;
+    user-select: none;
+    background-color: #6bd1ff;
+    font-family: revert;
+    opacity: 0.2;
+    transition: opacity 0.2s;
+}
+
+button:hover{
+    opacity: 1;
 }

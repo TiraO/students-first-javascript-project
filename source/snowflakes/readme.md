@@ -15,7 +15,7 @@
 13. add some kind of multiplayer
 14. randomize size of snowflakes over time
 15. ~~larger snowflakes fall faster~~
-16. add ability to delete snowflake instead when finalizing
+16. ~~add ability to delete snowflake instead when finalizing~~
 17. show current line being drawn
 18. add option to not fill finalized snowflake
 19. ~~make it work on mobile~~

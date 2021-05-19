@@ -153,6 +153,10 @@ let initialize = () => {
     let instructions = document.getElementsByClassName("instructions")[0]
     instructions.style="display:none"
   }
+  window.onDeleteButtonPress = ()=> {
+    app.stage.removeChild(snowflake.snowflakeContainer);
+    snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
+  }
 }
 
 
