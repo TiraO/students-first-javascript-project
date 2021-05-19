@@ -17,12 +17,13 @@
 15. ~~larger snowflakes fall faster~~
 16. ~~add ability to delete snowflake instead when finalizing~~
 17. show current line being drawn
-18. add option to not fill finalized snowflake
+18. ~~add option to not fill finalized snowflake~~
 19. ~~make it work on mobile~~
 20. add background selection
 21. canvas axis mirrored to first click of snowflake
 22. add ability to zoom on mobile
 23. ~~stop snowflakes from "popping" in an out~~
 24. re-factor code   
+25. undo button
 107. make multiplayer snowflake deathmatch version a paid subscription
 
