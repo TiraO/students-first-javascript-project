@@ -33,6 +33,10 @@ let initialize = () => {
         let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
         onTap(point);
     })
+    window.addEventListener("resize",(event)=>{
+        app.stage.width = window.innerWidth
+        app.stage.height = window.innerHeight
+    })
     window.onGoButtonPress = ()=> {
         snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4
         snowflake.isFinished = true
