@@ -24,3 +24,23 @@ button {
 button:hover{
     opacity: 1;
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+canvas {
+    width: 3840px;
+    height: 2160px;
+}
+
+@media(max-width: 800px) {
+    canvas {
+        width: 800px;
+        height: 1200px;
+    }
+}

@@ -1,10 +1,16 @@
+let stageHeight
+let stageWidth
+
 let initialize = () => {
-    const app = new PIXI.Application({antialias: true, width: window.innerWidth, height: window.innerHeight});
+    stageHeight = window.innerHeight
+    stageWidth = window.innerWidth
+    const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight});
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
     document.body.appendChild(app.view);
     let snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
+
 
     let previousClickTime = new Date().valueOf();
     let isDoubleClick = () => {
@@ -34,8 +40,8 @@ let initialize = () => {
         onTap(point);
     })
     window.addEventListener("resize",(event)=>{
-        app.stage.width = window.innerWidth
-        app.stage.height = window.innerHeight
+       // app.stage.resizeTo = app.view
+       // app.stage.resize()
     })
     window.onGoButtonPress = ()=> {
         snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4

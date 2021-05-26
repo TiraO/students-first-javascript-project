@@ -2,7 +2,7 @@ let frameRate = 60
 let scaleFactor = 1 / 8
 
 class Snowflake {
-  constructor(stage, stageWidth, stageHeight) {
+  constructor(stage) {
     this.stage = stage
     this.isFinished = false
     this.snowflakeContainer = new PIXI.Container();
@@ -23,17 +23,15 @@ class Snowflake {
       branchCount = branchCount + 1
     }
     this.points = [];
-    this.stageWidth = stageWidth;
-    this.stageHeight = stageHeight;
     this.snowflakeSize = {
-      height: this.stageHeight * scaleFactor,
-      width: this.stageWidth * scaleFactor
+      height: stageHeight * scaleFactor,
+      width: stageWidth * scaleFactor
     }
     this.velocity = null
   }
 
   addLine(event) {
-    let point = {x: event.x - this.stageWidth/2, y: event.y - this.stageHeight/2};
+    let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
     this.points.push(point);
     let previousPointIndex = (this.points.length - 2) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
@@ -81,7 +79,7 @@ class Snowflake {
   }
 
   renderFrame = () => {
-    let snowflakeAtBottom = this.snowflakeContainer.position.y >= this.stageHeight + this.snowflakeSize.height
+    let snowflakeAtBottom = this.snowflakeContainer.position.y >= stageHeight + this.snowflakeSize.height
     if (snowflakeAtBottom) {
       this.moveToTop();
     } else {
@@ -99,7 +97,7 @@ class Snowflake {
   }
 
   moveToTop = () => {
-    let snowflakeX = Math.random() * this.stageWidth
+    let snowflakeX = Math.random() * stageWidth
     this.snowflakeContainer.position.y = -1 * this.snowflakeSize.height
     this.snowflakeContainer.position.x = snowflakeX
   }
