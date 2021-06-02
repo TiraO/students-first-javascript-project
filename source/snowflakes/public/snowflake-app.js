@@ -4,7 +4,7 @@ let stageWidth
 let initialize = () => {
     stageHeight = window.innerHeight
     stageWidth = window.innerWidth
-    const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight});
+    const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window});
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
@@ -38,10 +38,6 @@ let initialize = () => {
     app.view.addEventListener("touchstart", (event)=>{
         let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
         onTap(point);
-    })
-    window.addEventListener("resize",(event)=>{
-       // app.stage.resizeTo = app.view
-       // app.stage.resize()
     })
     window.onGoButtonPress = ()=> {
         snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4
