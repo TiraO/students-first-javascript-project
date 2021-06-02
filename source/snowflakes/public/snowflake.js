@@ -22,6 +22,19 @@ class Snowflake {
       this.snowflakeContainer.addChild(branch);
       branchCount = branchCount + 1
     }
+    this.previewBranches = []
+    branchCount = 0;
+    while (branchCount < 12) {
+      let branch = new PIXI.Graphics();
+      branch.rotation = branchCount * 2 * Math.PI / 12;
+      branch.lineStyle(2, 0xFFFFFF, 0.8);
+      if (branchCount % 2 == 1) {
+        branch.scale.x = -1;
+      }
+      this.previewBranches.push(branch)
+      this.snowflakeContainer.addChild(branch);
+      branchCount = branchCount + 1
+    }
     this.points = [];
     this.snowflakeSize = {
       height: stageHeight * scaleFactor,
@@ -29,6 +42,19 @@ class Snowflake {
     }
     this.velocity = null
     this.animationOffset = 0
+  }
+
+  previewLine(event) {
+    let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
+    let previousPointIndex = (this.points.length - 2) % this.points.length;
+    console.log("previousPointIndex", previousPointIndex)
+    let previousPoint = this.points[previousPointIndex];
+    let branchIndex = 0;
+    while (branchIndex < this.branches.length) {
+      this.branches[branchIndex].moveTo(previousPoint.x, previousPoint.y);
+      this.branches[branchIndex].lineTo(point.x, point.y);
+      branchIndex = branchIndex + 1;
+    }
   }
 
   addLine(event) {

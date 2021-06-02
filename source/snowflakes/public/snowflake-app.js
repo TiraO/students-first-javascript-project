@@ -21,15 +21,18 @@ let initialize = () => {
         return timeSinceLastClick < 250;
     }
 
-    let onTap = (event) => {
+    let onTap = (point) => {
         if (isDoubleClick()) {
-            snowflake.finishSnowflake(event);
+            snowflake.finishSnowflake(point);
         } else if (snowflake.isFinished) {
 
         } else {
-            snowflake.addLine(event);
-            console.log(event)
+            snowflake.addLine(point);
+            console.log(point)
         }
+    }
+    let onMove = (point) => {
+        snowflake.previewLine(point);
     }
     app.view.addEventListener("mousedown", (event)=>{
         let point = {x: event.offsetX, y: event.offsetY}
@@ -38,6 +41,10 @@ let initialize = () => {
     app.view.addEventListener("touchstart", (event)=>{
         let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
         onTap(point);
+    })
+    app.view.addEventListener("mousemove", (event)=>{
+        let point = {x: event.offsetX, y: event.offsetY}
+        onMove(point)
     })
     window.onGoButtonPress = ()=> {
         snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4
