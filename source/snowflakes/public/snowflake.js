@@ -28,6 +28,7 @@ class Snowflake {
       width: stageWidth * scaleFactor
     }
     this.velocity = null
+    this.animationOffset = 0
   }
 
   addLine(event) {
@@ -84,10 +85,11 @@ class Snowflake {
       this.moveToTop();
     } else {
       this.snowflakeContainer.position.y += this.velocity / frameRate;
-      this.snowflakeContainer.position.x +=
-          this.calculateSize() / 10
-          * Math.random() / frameRate
-          * Math.sin(this.snowflakeContainer.position.y / 50)
+      let xSpeed = Math.random() / frameRate
+          * Math.sin((this.snowflakeContainer.position.y + this.animationOffset) / 50)
+          * Math.sin((this.snowflakeContainer.position.y + this.animationOffset) / 500);
+      this.snowflakeContainer.position.x += xSpeed * this.calculateSize() / 5;
+      this.snowflakeContainer.rotation -= xSpeed
     }
   }
 
@@ -100,6 +102,7 @@ class Snowflake {
     let snowflakeX = Math.random() * stageWidth
     this.snowflakeContainer.position.y = -1 * this.snowflakeSize.height
     this.snowflakeContainer.position.x = snowflakeX
+    this.animationOffset = stageHeight * Math.random()
   }
 
 
