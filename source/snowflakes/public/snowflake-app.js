@@ -23,7 +23,7 @@ let initialize = () => {
 
     let onTap = (point) => {
         if (isDoubleClick()) {
-            snowflake.finishSnowflake(point);
+            snowflake.fillSnowflake(point);
         } else if (snowflake.isFinished) {
 
         } else {
@@ -49,6 +49,7 @@ let initialize = () => {
     window.onGoButtonPress = ()=> {
         snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4
         snowflake.isFinished = true
+        snowflake.deletePreview()
         snowflake.shrink()
         snowflake.moveToTop()
         setInterval(snowflake.renderFrame, 1000 / frameRate);

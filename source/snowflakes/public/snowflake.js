@@ -46,13 +46,15 @@ class Snowflake {
 
   previewLine(event) {
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
-    let previousPointIndex = (this.points.length - 2) % this.points.length;
+    let previousPointIndex = (this.points.length - 1) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
     let previousPoint = this.points[previousPointIndex];
     let branchIndex = 0;
-    while (branchIndex < this.branches.length) {
-      this.branches[branchIndex].moveTo(previousPoint.x, previousPoint.y);
-      this.branches[branchIndex].lineTo(point.x, point.y);
+    while (branchIndex < this.previewBranches.length) {
+      this.previewBranches[branchIndex].clear();
+      this.previewBranches[branchIndex].lineStyle(2, 0xFFFFFF, 0.8);
+      this.previewBranches[branchIndex].moveTo(previousPoint.x, previousPoint.y);
+      this.previewBranches[branchIndex].lineTo(point.x, point.y);
       branchIndex = branchIndex + 1;
     }
   }
@@ -88,7 +90,7 @@ class Snowflake {
   }
 
 
-  finishSnowflake() {
+  fillSnowflake() {
     console.log("finishing snowflake");
     let branchIndex = 0
     while (branchIndex < this.branches.length) {
@@ -129,6 +131,12 @@ class Snowflake {
     this.snowflakeContainer.position.y = -1 * this.snowflakeSize.height
     this.snowflakeContainer.position.x = snowflakeX
     this.animationOffset = stageHeight * Math.random()
+  }
+
+  deletePreview = () => {
+    this.previewBranches.forEach((branch) => {
+      branch.clear()
+    })
   }
 
 
