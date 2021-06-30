@@ -1,3 +1,10 @@
+let serverTalk = () => {
+    const socket = io("http://localhost:3002");
+    socket.on("hello world", (data) => {
+        console.log("hello world happened", data);
+    });
+}
+
 let stageHeight
 let stageWidth
 
@@ -5,6 +12,7 @@ let initialize = () => {
     stageHeight = window.innerHeight
     stageWidth = window.innerWidth
     const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window});
+    serverTalk()
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
