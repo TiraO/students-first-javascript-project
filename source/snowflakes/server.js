@@ -10,3 +10,7 @@ server.listen(PORT, ()=>{
 setInterval(() => {
   io.emit('hello world')
 },5000)
+io.on("hi back", (data) => {
+  console.log("hi back")
+    }
+)
