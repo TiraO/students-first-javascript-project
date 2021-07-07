@@ -2,7 +2,7 @@ let serverTalk = () => {
     const socket = io("http://localhost:3002");
     socket.on("hello world", (data) => {
         console.log("hello world happened", data);
-        io.emit("hi back")
+        socket.emit("hi back")
     });
 }
 

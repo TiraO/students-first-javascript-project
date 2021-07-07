@@ -4,13 +4,16 @@ app.use(express.static(__dirname + '/public'));
 let PORT = process.env.PORT || 3002;
 let server = require('http').createServer(app)
 const io = require("socket.io")(server);
-server.listen(PORT, ()=>{
+server.listen(PORT, () => {
   console.log('App listening on port ' + PORT);
 });
 setInterval(() => {
   io.emit('hello world')
-},5000)
-io.on("hi back", (data) => {
-  console.log("hi back")
-    }
+}, 5000)
+io.on("connection", (socket) => {
+    socket.on("hi back", () => {
+      console.log("hi back")
+
+    })
+  }
 )
