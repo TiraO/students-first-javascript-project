@@ -11,8 +11,9 @@ setInterval(() => {
   io.emit('hello world')
 }, 5000)
 io.on("connection", (socket) => {
-    socket.on("hi back", () => {
-      console.log("hi back")
+    socket.on("upload snowflake", (snowflake) => {
+      io.emit("snowflake", snowflake)
+      console.log("it worked!", snowflake)
 
     })
   }
