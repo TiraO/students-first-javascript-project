@@ -1,21 +1,27 @@
+let snowflakeAlreadyExists = (points)=>{
+ return previousSnowflakePoints == points
+}
 let socket;
 let serverTalk = (stage) => {
   socket = io(window.location.href);
   socket.on("hello world", (data) => {
     console.log("hello world happened", data);
   });
-  socket.on("snowflake", (points)=>{
-    let snowflake = new Snowflake(stage)
-    // snowflake.
-    snowflake.points = points
-    snowflake.fillSnowflake();
-    snowflake.animateSnowflake();
-    // snowflake.renderPoints()
+  socket.on("snowflake", (points)=> {
+
+    if (!snowflakeAlreadyExists(points)) {
+      let snowflake = new Snowflake(stage)
+      snowflake.points = points
+      snowflake.fillSnowflake();
+      snowflake.animateSnowflake();
+    }
+
   })
 }
 
 let stageHeight;
 let stageWidth;
+let previousSnowflakePoints;
 
 let initialize = () => {
   stageHeight = window.innerHeight
@@ -66,6 +72,7 @@ let initialize = () => {
   window.onGoButtonPress = () => {
     snowflake.animateSnowflake()
     socket.emit("upload snowflake", snowflake.points)
+    previousSnowflakePoints = snowflake.points
     snowflake = new Snowflake(app.stage);
     let instructions = document.getElementsByClassName("instructions")[0]
     instructions.style = "display:none"
