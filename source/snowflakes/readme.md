@@ -25,5 +25,6 @@
 23. ~~stop snowflakes from "popping" in an out~~
 24. re-factor code   
 25. undo button
+26. preserve un-filled state of server snowflakes
 107. make multiplayer snowflake deathmatch version a paid subscription
 

@@ -91,7 +91,7 @@ class Snowflake {
 
 
   fillSnowflake() {
-    console.log("finishing snowflake");
+    console.log("filling snowflake");
     let branchIndex = 0
     while (branchIndex < this.branches.length) {
       this.branches[branchIndex].clear();
@@ -105,6 +105,15 @@ class Snowflake {
       this.branches[branchIndex].endFill();
       branchIndex = branchIndex + 1;
     }
+  }
+
+  animateSnowflake() {
+    this.velocity = Math.sqrt(this.calculateSize()) * 4
+    this.isFinished = true
+    this.deletePreview()
+    this.shrink()
+    this.moveToTop()
+    setInterval(this.renderFrame, 1000 / frameRate);
   }
 
   renderFrame = () => {

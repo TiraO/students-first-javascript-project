@@ -9,6 +9,7 @@ let serverTalk = (stage) => {
     // snowflake.
     snowflake.points = points
     snowflake.fillSnowflake();
+    snowflake.animateSnowflake();
     // snowflake.renderPoints()
   })
 }
@@ -63,12 +64,7 @@ let initialize = () => {
     onMove(point)
   })
   window.onGoButtonPress = () => {
-    snowflake.velocity = Math.sqrt(snowflake.calculateSize()) * 4
-    snowflake.isFinished = true
-    snowflake.deletePreview()
-    snowflake.shrink()
-    snowflake.moveToTop()
-    setInterval(snowflake.renderFrame, 1000 / frameRate);
+    snowflake.animateSnowflake()
     socket.emit("upload snowflake", snowflake.points)
     snowflake = new Snowflake(app.stage);
     let instructions = document.getElementsByClassName("instructions")[0]
