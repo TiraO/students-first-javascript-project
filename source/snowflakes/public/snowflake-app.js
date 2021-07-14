@@ -1,6 +1,6 @@
 let socket;
 let serverTalk = (stage) => {
-  socket = io("http://localhost:3002");
+  socket = io(window.location.href);
   socket.on("hello world", (data) => {
     console.log("hello world happened", data);
   });
