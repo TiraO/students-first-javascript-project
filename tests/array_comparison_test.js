@@ -7,7 +7,7 @@ let comparePoints = (array1, array2) => {
     let foundMismatch = false;
     array1.forEach((point, index) => {
         if (foundMismatch == false) {
-            foundMismatch = point != array2[index]
+            foundMismatch = (point.x != array2[index].x) || (point.y != array2[index].y)
         }
     })
     return !foundMismatch
@@ -16,40 +16,40 @@ describe("#comparePoints", () => {
     describe('when the contents of the arrays are equal', function () {
         it('should return true', function () {
 
-            let array1 = [1, 2, 3]
-            let array2 = [1, 2, 3]
+            let array1 = [{x: 5, y: 3}, {x: 2, y: 7}]
+            let array2 = [{x: 5, y: 3}, {x: 2, y: 7}]
             expect(comparePoints(array1, array2)).to.eq(true)
         });
     });
 
     describe("when the contents are completely different", () => {
         it('should return false', function () {
-            let array1 = [1, 2, 3]
-            let array2 = [6, 5, 4]
+            let array1 = [{x: 5, y: 3}, {x: 2, y: 7}]
+            let array2 = [{x: 1, y: 6}, {x: 5, y: 3}]
             expect(comparePoints(array1, array2)).to.eq(false)
 
         });
     })
     describe("when the last item is different", () => {
         it('should return false', function () {
-            let array1 = [1, 2, 3]
-            let array2 = [1, 2, 4]
+            let array1 = [{x: 5, y: 3}, {x: 2, y: 7}]
+            let array2 = [{x: 5, y: 3}, {x: 2, y: 8}]
             expect(comparePoints(array1, array2)).to.eq(false)
 
         });
     })
     describe("when the first item is different", () => {
         it('should return false', function () {
-            let array1 = [1, 2, 3]
-            let array2 = [9, 2, 3]
+            let array1 = [{x: 3, y: 3}, {x: 2, y: 7}]
+            let array2 = [{x: 5, y: 3}, {x: 2, y: 7}]
             expect(comparePoints(array1, array2)).to.eq(false)
 
         });
     })
     describe("when the lists are different lengths", () => {
         it('should return false', function () {
-            let array1 = [1, 2, 3]
-            let array2 = [1, 2, 3, 1]
+            let array1 = [{x: 5, y: 3}, {x: 2, y: 7}]
+            let array2 = [{x: 5, y: 3}, {x: 2, y: 7}, {x: 1, y: 2}]
             expect(comparePoints(array1, array2)).to.eq(false)
 
         });
