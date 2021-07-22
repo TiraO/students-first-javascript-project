@@ -1,5 +1,19 @@
+let previousSnowflakePoints;
+let arraysMatch = (array1, array2) => {
+  if (array1.length != array2.length) {
+    return false;
+  }
+
+  let foundMismatch = false;
+  array1.forEach((point, index) => {
+    if (foundMismatch == false) {
+      foundMismatch = (point.x != array2[index].x) || (point.y != array2[index].y)
+    }
+  })
+  return !foundMismatch
+}
 let snowflakeAlreadyExists = (points)=>{
- return previousSnowflakePoints == points
+  return arraysMatch(previousSnowflakePoints, points)
 }
 let socket;
 let serverTalk = (stage) => {
@@ -21,7 +35,6 @@ let serverTalk = (stage) => {
 
 let stageHeight;
 let stageWidth;
-let previousSnowflakePoints;
 
 let initialize = () => {
   stageHeight = window.innerHeight
