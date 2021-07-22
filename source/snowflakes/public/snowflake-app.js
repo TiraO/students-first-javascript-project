@@ -39,7 +39,7 @@ let stageWidth;
 let initialize = () => {
   stageHeight = window.innerHeight
   stageWidth = window.innerWidth
-  const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window});
+  const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window, transparent: true});
   serverTalk(app.stage)
 
 // The application will create a canvas element for you that you

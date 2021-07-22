@@ -12,11 +12,11 @@
 10. ~~don't draw an extra line when you're finishing the snowflake?~~
 11. ~~basic instructions on screen (in progress)~~
 12. turn into a pile of snow
-13. add some kind of multiplayer
+13. ~~add some kind of multiplayer~~
 14. randomize size of snowflakes over time
 15. ~~larger snowflakes fall faster~~
 16. ~~add ability to delete snowflake instead when finalizing~~
-17. show current line being drawn
+17. ~~show current line being drawn~~ Now working on mobile
 18. ~~add option to not fill finalized snowflake~~
 19. ~~make it work on mobile~~
 20. add background selection
@@ -26,5 +26,8 @@
 24. re-factor code   
 25. undo button
 26. preserve un-filled state of server snowflakes
+27. cache snowflakes until server restarts
+28. add optional color to snowflakes
+29. investigate performance issues?
 107. make multiplayer snowflake deathmatch version a paid subscription
 
