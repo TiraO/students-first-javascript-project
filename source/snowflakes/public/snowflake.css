@@ -35,8 +35,14 @@ html, body {
 
 
 img {
-    position: absolute;
     min-height: 100%;
     min-width: 100%;
+}
+
+.background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     z-index: -1;
 }
