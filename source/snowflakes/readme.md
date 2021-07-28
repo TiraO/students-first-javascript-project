@@ -16,7 +16,8 @@
 14. randomize size of snowflakes over time
 15. ~~larger snowflakes fall faster~~
 16. ~~add ability to delete snowflake instead when finalizing~~
-17. ~~show current line being drawn~~ Now working on mobile
+17.a ~~show current line being drawn~~
+17.b ~~Line preview on mobile~~
 18. ~~add option to not fill finalized snowflake~~
 19. ~~make it work on mobile~~
 20. add background selection

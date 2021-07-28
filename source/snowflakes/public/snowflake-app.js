@@ -68,20 +68,27 @@ let initialize = () => {
     }
   }
   let onMove = (point) => {
-    snowflake.previewLine(point);
+    if(snowflake.points.length > 0) {
+      snowflake.previewLine(point);
+    }
   }
   app.view.addEventListener("mousedown", (event) => {
     let point = {x: event.offsetX, y: event.offsetY}
     onTap(point);
   });
-  app.view.addEventListener("touchstart", (event) => {
-    let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
+  app.view.addEventListener("touchend", (event) => {
+    let point = {x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY}
     onTap(point);
   })
   app.view.addEventListener("mousemove", (event) => {
     let point = {x: event.offsetX, y: event.offsetY}
     onMove(point)
   })
+  app.view.addEventListener("touchmove", (event) => {
+    let point = {x: event.touches[0].clientX, y: event.touches[0].clientY}
+    onMove(point)
+  })
+
   window.onGoButtonPress = () => {
     snowflake.animateSnowflake()
     socket.emit("upload snowflake", snowflake.points)
