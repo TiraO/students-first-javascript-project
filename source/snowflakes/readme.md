@@ -18,17 +18,18 @@
 16. ~~add ability to delete snowflake instead when finalizing~~
 17.a ~~show current line being drawn~~
 17.b ~~Line preview on mobile~~
-18. ~~add option to not fill finalized snowflake~~
-19. ~~make it work on mobile~~
-20. add background selection
-21. canvas axis mirrored to first click of snowflake
-22. add ability to zoom on mobile
-23. ~~stop snowflakes from "popping" in an out~~
-24. re-factor code   
-25. undo button
-26. preserve un-filled state of server snowflakes
-27. cache snowflakes until server restarts
-28. add optional color to snowflakes
-29. investigate performance issues?
-107. make multiplayer snowflake deathmatch version a paid subscription
+17. ~~add option to not fill finalized snowflake~~
+18. ~~make it work on mobile~~
+19. add background selection
+20. canvas axis mirrored to first click of snowflake
+21. add ability to zoom on mobile
+22. ~~stop snowflakes from "popping" in an out~~
+23. re-factor code   
+24. undo button
+25. preserve un-filled state of server snowflakes
+26. cache snowflakes until server restarts
+27. add optional color to snowflakes
+28. investigate performance issues?
+29. add leaf mode
+30. make multiplayer snowflake deathmatch version a paid subscription
 
