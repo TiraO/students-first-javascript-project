@@ -117,9 +117,13 @@ class Snowflake {
   }
 
   renderFrame = () => {
-    let snowflakeAtBottom = this.snowflakeContainer.position.y >= stageHeight + this.snowflakeSize.height
-    if (snowflakeAtBottom) {
-      this.crumpleSnowflake()
+    let snowflakeTouchesBottom = this.snowflakeContainer.position.y >= stageHeight
+    if (snowflakeTouchesBottom) {
+      fallenSnow.crumpleSnowflake(this)
+
+    }
+    let snowflakeBelowBottom = this.snowflakeContainer.position.y >= stageHeight + this.snowflakeSize.height
+    if (snowflakeBelowBottom) {
       this.moveToTop();
     } else {
       this.snowflakeContainer.position.y += this.velocity / frameRate;
@@ -131,15 +135,7 @@ class Snowflake {
     }
   }
 
-  crumpleSnowflake = () => {
-    let snowPile = new PIXI.Graphics();
-    this.stage.addChild(snowPile);
-    snowPile.lineStyle(20, 0xFFFFFF, 0.8);
-    let length = this.calculateSize() * scaleFactor;
-    let point = {x: this.snowflakeContainer.position.x, y: stageHeight};
-    snowPile.moveTo(point.x - length / 2, point.y);
-    snowPile.lineTo(point.x + length / 2, point.y);
-  }
+
 
   shrink = () => {
     this.snowflakeContainer.scale.x *= scaleFactor

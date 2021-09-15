@@ -35,12 +35,14 @@ let serverTalk = (stage) => {
 
 let stageHeight;
 let stageWidth;
+let fallenSnow;
 
 let initialize = () => {
   stageHeight = window.innerHeight
   stageWidth = window.innerWidth
   const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window, transparent: true});
   serverTalk(app.stage)
+  fallenSnow = new FallenSnow();
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
