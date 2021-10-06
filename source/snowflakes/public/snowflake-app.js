@@ -42,7 +42,9 @@ let initialize = () => {
   stageWidth = window.innerWidth
   const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window, transparent: true});
   serverTalk(app.stage)
-  fallenSnow = new FallenSnow();
+  let canvas = document.getElementsByTagName("canvas")[0]
+  let glContext = app.renderer.context.gl
+  fallenSnow = new FallenSnow(glContext);
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
