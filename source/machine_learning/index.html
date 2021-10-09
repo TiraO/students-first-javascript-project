@@ -7,16 +7,17 @@
     <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
 </head>
 <body>
-<img src="IMG_6052.jpeg" alt="" id="input_img" />
+<img src="dog.png" alt="" id="input_img" />
 <script>
   const image = document.getElementById("input_img");
-  ml5
-    .imageClassifier("MobileNet")
-    .then((classifier) => classifier.predict(image))
-    .then((results) => {
+  let classifyIt = async ()=>{
+    let classifier = await ml5.imageClassifier("MobileNet")
+    let results = await classifier.predict(image)
       console.log(results[0].label);
       console.log(results);
-    });
+  }
+
+  classifyIt();
 </script>
 </body>
 </html>
