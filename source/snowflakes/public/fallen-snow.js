@@ -1,7 +1,8 @@
 class FallenSnow {
   glContext
 
-  constructor(glContext) {
+  constructor(app, glContext) {
+    this.app = app;
     this.glContext = glContext
   }
 
@@ -16,19 +17,41 @@ class FallenSnow {
     let lineStart = {x: snowflake.snowflakeContainer.position.x, y: stageHeight - snowDepth};
     snowPile.moveTo(lineStart.x - length / 2, lineStart.y);
     snowPile.lineTo(lineStart.x + length / 2, lineStart.y);
+
+    snowPile.lineStyle(40, 0xF0F0A0)
+    snowPile.moveTo(lineStart.x - length / 2, 0);
+    snowPile.lineTo(lineStart.x + length / 2, lineStart.y);
+    snowPile.lineTo(lineStart.x + length / 2, 0);
+
   }
 
   getPixelColor = (point) => {
-    let gl = this.glContext;
+   let gl = document.getElementsByTagName("canvas")[0].getContext('webgl2', {preserveDrawingBuffer: true});
     let width = 1;
-    let height = 1;
-    let pixels = new Uint8Array(width * height * 4);
-    let rgba = gl.readPixels(point.x, point.y, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+    let height = 10;
 
-    return rgba
+
+    // gl.clearColor(.25, .5, .75, 1);
+    // gl.clear(gl.COLOR_BUFFER_BIT);
+
+    let imageData = new Uint8Array(width*height*4);
+    gl.readPixels(5, 5,
+      width, height, gl.RGBA, gl.UNSIGNED_BYTE, imageData);
+    console.log(imageData)
+
+
+    // let i  = gl.copyTexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 0, 0, 512, 512, 0);
+    //     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imageData);
+// console.log(imageData)
+
+    return
   }
 
   getSnowDepth = (point) => {
+    // the pixels will be empty unless you get them right after rendering >_<
+    this.app.renderer.render(this.app.stage);
+
+
     let white = 0xFFF;
     let pixelColor = white;
     let depth = 0;

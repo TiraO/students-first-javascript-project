@@ -44,7 +44,7 @@ let initialize = () => {
   serverTalk(app.stage)
   let canvas = document.getElementsByTagName("canvas")[0]
   let glContext = app.renderer.context.gl
-  fallenSnow = new FallenSnow(glContext);
+  fallenSnow = new FallenSnow(app, glContext);
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
