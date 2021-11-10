@@ -18,33 +18,29 @@ class FallenSnow {
     snowPile.moveTo(lineStart.x - length / 2, lineStart.y);
     snowPile.lineTo(lineStart.x + length / 2, lineStart.y);
 
-    snowPile.lineStyle(40, 0xF0F0A0)
-    snowPile.moveTo(lineStart.x - length / 2, 0);
-    snowPile.lineTo(lineStart.x + length / 2, lineStart.y);
-    snowPile.lineTo(lineStart.x + length / 2, 0);
-
   }
 
   getPixelColor = (point) => {
    let gl = document.getElementsByTagName("canvas")[0].getContext('webgl2', {preserveDrawingBuffer: true});
     let width = 1;
-    let height = 10;
+    let height = 1;
 
 
     // gl.clearColor(.25, .5, .75, 1);
     // gl.clear(gl.COLOR_BUFFER_BIT);
 
     let imageData = new Uint8Array(width*height*4);
-    gl.readPixels(5, 5,
+    gl.readPixels(point.x, point.y,
       width, height, gl.RGBA, gl.UNSIGNED_BYTE, imageData);
     console.log(imageData)
 
+    let hexColor = (1 << 24) + (imageData[0] << 16) + (imageData[1] << 8) + (imageData[2])
 
     // let i  = gl.copyTexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 0, 0, 512, 512, 0);
     //     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imageData);
 // console.log(imageData)
 
-    return
+    return hexColor
   }
 
   getSnowDepth = (point) => {
