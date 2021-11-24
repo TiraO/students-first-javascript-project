@@ -30,7 +30,7 @@ class FallenSnow {
     // gl.clear(gl.COLOR_BUFFER_BIT);
 
     let imageData = new Uint8Array(width*height*4);
-    gl.readPixels(point.x, point.y,
+    gl.readPixels(Math.round(point.x), Math.round(stageHeight - point.y),
       width, height, gl.RGBA, gl.UNSIGNED_BYTE, imageData);
     console.log(imageData)
 
@@ -46,7 +46,7 @@ class FallenSnow {
   getSnowDepth = (point) => {
     // the pixels will be empty unless you get them right after rendering >_<
     this.app.renderer.render(this.app.stage);
-
+    console.log("snow depth at: ", point)
 
     let white = 0xFFF;
     let pixelColor = white;

@@ -12,7 +12,7 @@ let arraysMatch = (array1, array2) => {
   })
   return !foundMismatch
 }
-let snowflakeAlreadyExists = (points)=>{
+let snowflakeAlreadyExists = (points) => {
   return arraysMatch(previousSnowflakePoints, points)
 }
 let socket;
@@ -21,7 +21,7 @@ let serverTalk = (stage) => {
   socket.on("hello world", (data) => {
     console.log("hello world happened", data);
   });
-  socket.on("snowflake", (points)=> {
+  socket.on("snowflake", (points) => {
 
     if (!snowflakeAlreadyExists(points)) {
       let snowflake = new Snowflake(stage)
@@ -40,11 +40,18 @@ let fallenSnow;
 let initialize = () => {
   stageHeight = window.innerHeight
   stageWidth = window.innerWidth
-  const app = new PIXI.Application({antialias: true, width: stageWidth, height: stageHeight, resizeTo: window, transparent: true});
+  const app = new PIXI.Application({
+    antialias: true,
+    width: stageWidth,
+    height: stageHeight,
+    resizeTo: window,
+    transparent: true
+  });
   serverTalk(app.stage)
   let canvas = document.getElementsByTagName("canvas")[0]
   let glContext = app.renderer.context.gl
   fallenSnow = new FallenSnow(app, glContext);
+
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
@@ -72,7 +79,7 @@ let initialize = () => {
     }
   }
   let onMove = (point) => {
-    if(snowflake.points.length > 0) {
+    if (snowflake.points.length > 0) {
       snowflake.previewLine(point);
     }
   }
