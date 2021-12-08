@@ -4,6 +4,7 @@ class FallenSnow {
   constructor(app, glContext) {
     this.app = app;
     this.glContext = glContext
+    this.layerThickness = 20
   }
 
 
@@ -12,7 +13,7 @@ class FallenSnow {
     let landingPoint = {x: snowflake.snowflakeContainer.position.x, y: stageHeight};
     let snowDepth = this.getSnowDepth(landingPoint)
     snowflake.stage.addChild(snowPile);
-    snowPile.lineStyle(20, 0xFFFFFF, 0.8);
+    snowPile.lineStyle(this.layerThickness, 0xFFFFFF, 0.8);
     let length = snowflake.calculateSize() * scaleFactor;
     let lineStart = {x: snowflake.snowflakeContainer.position.x, y: stageHeight - snowDepth};
     snowPile.moveTo(lineStart.x - length / 2, lineStart.y);
@@ -51,7 +52,7 @@ class FallenSnow {
     let depth = 0;
     while (pixelColor == white) {
 
-      depth += 1
+      depth += this.layerThickness
       pixelColor = this.getPixelColor({x: point.x, y: point.y - depth});
 
     }
