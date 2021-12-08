@@ -117,8 +117,11 @@ class Snowflake {
   }
 
   renderFrame = () => {
-    let snowflakeTouchesBottom = this.snowflakeContainer.position.y >= stageHeight
+    let snowflakeTouchesBottom = (this.snowflakeContainer.position.y >= stageHeight)
+        && (this.snowflakeContainer.position.y < stageHeight + this.velocity / frameRate)
+
     if (snowflakeTouchesBottom) {
+
       fallenSnow.crumpleSnowflake(this)
 
     }
