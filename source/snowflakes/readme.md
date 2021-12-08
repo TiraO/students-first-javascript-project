@@ -11,7 +11,8 @@
 9. ~~should velocity really be based on screen height?~~
 10. ~~don't draw an extra line when you're finishing the snowflake?~~
 11. ~~basic instructions on screen (in progress)~~
-12. turn into a pile of snow
+12. ~~turn into a pile of snow~~ 
+--fix bug where snow is added midair when snowflake is being drawn
 13. ~~add some kind of multiplayer~~
 14. randomize size of snowflakes over time
 15. ~~larger snowflakes fall faster~~
@@ -31,5 +32,6 @@
 27. add optional color to snowflakes
 28. investigate performance issues?
 29. add leaf mode
-30. make multiplayer snowflake deathmatch version a paid subscription
+30. make pile of snow pretty
+300. make multiplayer snowflake deathmatch version a paid subscription
 
