@@ -1,4 +1,18 @@
-#To-Do
+# Getting started
+
+in the terminal, navigate to students-first-javascript-project directory
+then install dependencies
+```bash
+npm install
+```
+to start the server
+either run in terminal:
+```bash
+node ./source/snowflakes/server.js
+```
+or right click on server.js in Webstorm and choose "run"
+
+To-Do
 
 1. ~~Fix velocity by adding frametime~~
 2. ~~Make the snowflake rotate as it falls~~
