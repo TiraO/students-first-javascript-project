@@ -44,6 +44,15 @@ class Snowflake {
     this.animationOffset = 0
   }
 
+  getAxisAdjustment(event) {
+    let center = {x: stageWidth/2, y: stageHeight/2}
+    let mouseAngle = Math.atan((event.y - center.y)/(event.x - center.x))
+    let radiansInCircle = 2*Math.PI;
+    let originalAxisAngle = radiansInCircle / 12;
+    let offsetAngle = originalAxisAngle - mouseAngle
+    return offsetAngle
+  }
+
   previewLine(event) {
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
     let previousPointIndex = (this.points.length - 1) % this.points.length;
@@ -61,6 +70,12 @@ class Snowflake {
 
   addLine(event) {
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
+    if(this.points.length == 0){
+      this.branches.forEach((branch)=>{
+        let radiansToRotate = this.getAxisAdjustment(event)
+        branch.rotation += radiansToRotate
+      })
+    }
     this.points.push(point);
     let previousPointIndex = (this.points.length - 2) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)

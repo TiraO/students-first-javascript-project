@@ -48,7 +48,6 @@ let initialize = () => {
     transparent: true
   });
   serverTalk(app.stage)
-  let canvas = document.getElementsByTagName("canvas")[0]
   let glContext = app.renderer.context.gl
   fallenSnow = new FallenSnow(app, glContext);
 
