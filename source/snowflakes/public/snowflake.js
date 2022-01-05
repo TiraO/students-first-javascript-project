@@ -53,8 +53,33 @@ class Snowflake {
     return offsetAngle
   }
 
+  rotateByAngle(point, pivot, rotateAngle){
+    let pointAngle = Math.atan2((point.y-pivot.y), (point.x-pivot.x))
+    let distance = Math.sqrt((point.y-pivot.y)**2 + (point.x-pivot.x)**2)
+    let rotatedPoint = {
+      x: pivot.x + distance * Math.cos(pointAngle+rotateAngle),
+      y: pivot.y + distance * Math.sin(pointAngle+rotateAngle)
+    }
+    return rotatedPoint
+  }
+
   previewLine(event) {
+    // if(!this.hasStartedDrawing){
+    //   let radiansToRotate = this.getAxisAdjustment(event);
+    //
+    //   this.branches.forEach((branch)=>{
+    //     branch.rotation += radiansToRotate
+    //   })
+    //   this.previewBranches.forEach((branch)=>{
+    //     branch.rotation += radiansToRotate
+    //   })
+    //   this.hasStartedDrawing = true;
+    // }
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
+    let center = {x: stageWidth/2, y: stageHeight/2}
+    let radiansToRotate = this.getAxisAdjustment(event);
+    point = this.rotateByAngle(point, {x: 0, y: 0}, -radiansToRotate);
+
     let previousPointIndex = (this.points.length - 1) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
     let previousPoint = this.points[previousPointIndex];
@@ -70,12 +95,7 @@ class Snowflake {
 
   addLine(event) {
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
-    if(this.points.length == 0){
-      this.branches.forEach((branch)=>{
-        let radiansToRotate = this.getAxisAdjustment(event)
-        branch.rotation += radiansToRotate
-      })
-    }
+
     this.points.push(point);
     let previousPointIndex = (this.points.length - 2) % this.points.length;
     console.log("previousPointIndex", previousPointIndex)
