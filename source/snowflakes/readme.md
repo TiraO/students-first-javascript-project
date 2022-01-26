@@ -36,7 +36,7 @@ To-Do
 17. ~~add option to not fill finalized snowflake~~
 18. ~~make it work on mobile~~
 19. add background selection
-20. canvas axis mirrored to first click of snowflake
+20. ~~canvas axis mirrored to first click of snowflake~~
 21. add ability to zoom on mobile
 22. ~~stop snowflakes from "popping" in an out~~
 23. re-factor code   

@@ -46,10 +46,9 @@ class Snowflake {
 
   getAxisAdjustment(event) {
     let center = {x: stageWidth/2, y: stageHeight/2}
-    let mouseAngle = Math.atan((event.y - center.y)/(event.x - center.x))
     let radiansInCircle = 2*Math.PI;
-    let originalAxisAngle = radiansInCircle / 12;
-    let offsetAngle = originalAxisAngle - mouseAngle
+    let offsetAngle = radiansInCircle/24 + Math.atan2((event.y - center.y), (event.x - center.x))
+    console.log("offsetAngle", offsetAngle*180/Math.PI)
     return offsetAngle
   }
 
