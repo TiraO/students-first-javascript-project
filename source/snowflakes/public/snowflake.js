@@ -64,20 +64,7 @@ class Snowflake {
   }
 
   previewLine(event) {
-    if(!this.hasStartedDrawing){
-      let radiansToRotate = this.getAxisAdjustment(event);
-      this.axisAdjustment = radiansToRotate;
-
-      this.branches.forEach((branch)=>{
-        branch.rotation += radiansToRotate
-      })
-      this.previewBranches.forEach((branch)=>{
-        branch.rotation += radiansToRotate
-      })
-      this.hasStartedDrawing = true;
-    }
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
-    let center = {x: stageWidth/2, y: stageHeight/2}
     let radiansToRotate = this.axisAdjustment;
     point = this.rotateByAngle(point, {x: 0, y: 0}, -radiansToRotate);
 
@@ -95,7 +82,21 @@ class Snowflake {
   }
 
   addLine(event) {
+    if(!this.hasStartedDrawing){
+      let radiansToRotate = this.getAxisAdjustment(event);
+      this.axisAdjustment = radiansToRotate;
+
+      this.branches.forEach((branch)=>{
+        branch.rotation += radiansToRotate
+      })
+      this.previewBranches.forEach((branch)=>{
+        branch.rotation += radiansToRotate
+      })
+      this.hasStartedDrawing = true;
+    }
     let point = {x: event.x - stageWidth/2, y: event.y - stageHeight/2};
+    let radiansToRotate = this.axisAdjustment;
+    point = this.rotateByAngle(point, {x: 0, y: 0}, -radiansToRotate);
 
     this.points.push(point);
     let previousPointIndex = (this.points.length - 2) % this.points.length;
