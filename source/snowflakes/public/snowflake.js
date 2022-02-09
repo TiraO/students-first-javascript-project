@@ -107,7 +107,6 @@ class Snowflake {
       this.branches[branchIndex].lineTo(point.x, point.y);
       branchIndex = branchIndex + 1;
     }
-
   }
 
   calculateSize() {
@@ -143,7 +142,7 @@ class Snowflake {
     }
   }
 
-  animateSnowflake() {
+  animate() {
     this.velocity = Math.sqrt(this.calculateSize()) * 4
     this.isFinished = true
     this.deletePreview()

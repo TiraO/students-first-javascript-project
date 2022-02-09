@@ -27,7 +27,7 @@ let serverTalk = (stage) => {
       let snowflake = new Snowflake(stage)
       snowflake.points = points
       snowflake.fillSnowflake();
-      snowflake.animateSnowflake();
+      snowflake.animate();
     }
 
   })
@@ -55,7 +55,7 @@ let initialize = () => {
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
   document.body.appendChild(app.view);
-  let snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
+  let valentine = new Valentine(app.stage)
 
 
   let previousClickTime = new Date().valueOf();
@@ -69,17 +69,17 @@ let initialize = () => {
 
   let onTap = (point) => {
     if (isDoubleClick()) {
-      snowflake.fillSnowflake(point);
-    } else if (snowflake.isFinished) {
+      valentine.fillSnowflake(point);
+    } else if (valentine.isFinished) {
 
     } else {
-      snowflake.addLine(point);
+      valentine.addLine(point);
       console.log(point)
     }
   }
   let onMove = (point) => {
-    if (snowflake.points.length > 0) {
-      snowflake.previewLine(point);
+    if (valentine.points.length > 0) {
+      valentine.previewLine(point);
     }
   }
   app.view.addEventListener("mousedown", (event) => {
@@ -100,17 +100,17 @@ let initialize = () => {
   })
 
   window.onGoButtonPress = () => {
-    snowflake.animateSnowflake()
-    socket.emit("upload snowflake", snowflake.points)
-    previousSnowflakePoints = snowflake.points
-    snowflake = new Snowflake(app.stage);
+    valentine.animate()
+    socket.emit("upload snowflake", valentine.points)
+    previousSnowflakePoints = valentine.points
+    valentine = new Valentine(app.stage);
     let instructions = document.getElementsByClassName("instructions")[0]
     instructions.style = "display:none"
 
   }
   window.onDeleteButtonPress = () => {
-    app.stage.removeChild(snowflake.snowflakeContainer);
-    snowflake = new Snowflake(app.stage, window.innerWidth, window.innerHeight);
+    app.stage.removeChild(valentine.snowflakeContainer);
+    valentine = new Valentine(app.stage, window.innerWidth, window.innerHeight);
   }
 }
 
