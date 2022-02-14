@@ -21,6 +21,8 @@ class Valentine {
     this.valentineParts.push(this.rightSnowflake)
     this.valentineContainer.addChild(this.rightSnowflake.snowflakeContainer)
 
+    this.valentineSize = stageHeight
+
     let heartTexture = PIXI.Texture.from("wideheartmask.png");
     let heartContainer = new PIXI.Sprite(heartTexture);
     stage.addChild(heartContainer);
@@ -33,27 +35,67 @@ class Valentine {
     this.points = this.middleSnowflake.points
   }
 
-  // this.valentineParts.forEach((part)=>{
-  //   addLine(event);
-  //   previewLine(event);
-  //   animate();
-  //
-  // })
 
   addLine(event) {
-    this.leftSnowflake.addLine(event)
-    this.middleSnowflake.addLine(event)
-}
+    this.valentineParts.forEach((part)=>{
+      part.addLine(event);
+    })
+  }
+
   previewLine(event) {
-    this.leftSnowflake.previewLine(event)
-    this.middleSnowflake.previewLine(event)
+    this.valentineParts.forEach((part)=>{
+      part.previewLine(event)
+    })
   }
+
   fillSnowflake() {
-    this.leftSnowflake.fillSnowflake()
-    this.middleSnowflake.fillSnowflake()
+    this.valentineParts.forEach((part)=>{
+      part.fillSnowflake()
+    })
   }
+
   animate() {
-    this.leftSnowflake.animate()
-    this.middleSnowflake.animate()
+    this.velocity = Math.sqrt(this.valentineSize) * 4
+    this.isFinished = true
+    this.deletePreview()
+    this.shrink()
+    this.moveToTop()
+    setInterval(this.renderFrame, 1000 / frameRate);
   }
+
+  renderFrame = () => {
+    let valentineBelowBottom = this.valentineContainer.position.y >= stageHeight + this.valentineSize
+    if (valentineBelowBottom) {
+      this.moveToTop();
+    } else {
+      this.valentineContainer.position.y += this.velocity / frameRate;
+      let xSpeed = Math.random() / frameRate
+          * Math.sin((this.valentineContainer.position.y + this.animationOffset) / 50)
+          * Math.sin((this.valentineContainer.position.y + this.animationOffset) / 500);
+      this.valentineContainer.position.x += xSpeed * this.valentineSize / 5;
+      this.valentineContainer.rotation -= xSpeed
+    }
+  }
+
+
+
+  shrink = () => {
+    this.valentineContainer.scale.x *= scaleFactor
+    this.valentineContainer.scale.y *= scaleFactor
+  }
+
+  moveToTop = () => {
+    let snowflakeX = Math.random() * stageWidth
+    this.valentineContainer.position.y = -1 * this.valentineSize
+    this.valentineContainer.position.x = snowflakeX
+    this.animationOffset = stageHeight * Math.random()
+  }
+
+  deletePreview = () => {
+    // this.previewBranches.forEach((branch) => {
+    //   branch.clear()
+    // })
+  }
+
+
 }
