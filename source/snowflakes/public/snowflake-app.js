@@ -49,7 +49,7 @@ let initialize = () => {
   });
   serverTalk(app.stage)
   let glContext = app.renderer.context.gl
-  fallenSnow = new FallenSnow(app, glContext);
+  // fallenSnow = new FallenSnow(app, glContext);
 
 
 // The application will create a canvas element for you that you
