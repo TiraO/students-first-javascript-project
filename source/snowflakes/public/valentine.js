@@ -36,13 +36,18 @@ class Valentine {
   }
 
 
+
   addLine(event) {
+    event = this.middleSnowflake.snowflakeContainer.toLocal(
+        new PIXI.Point(event.x + stageWidth / 2, event.y + stageHeight / 2));
     this.valentineParts.forEach((part)=>{
       part.addLine(event);
     })
   }
 
   previewLine(event) {
+    event = this.middleSnowflake.snowflakeContainer.toLocal(
+        new PIXI.Point(event.x + stageWidth / 2, event.y + stageHeight / 2));
     this.valentineParts.forEach((part)=>{
       part.previewLine(event)
     })
