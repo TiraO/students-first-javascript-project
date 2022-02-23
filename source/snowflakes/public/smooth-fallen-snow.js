@@ -16,8 +16,12 @@ class FallenSnow {
     this.snowPile.lineStyle(this.layerThickness, 0xFFFFFF, 1);
     this.snowPile.moveTo(0,stageHeight)
     this.snowHeights.forEach((snowHeight, index)=>{
+      let previousX = x
+      let previousY = this.snowHeights[index-1] || 0
       x+= stageWidth/this.snowHeights.length
-      this.snowPile.lineTo(x, stageHeight - snowHeight);
+      let y = stageHeight - snowHeight
+      this.snowPile.quadraticCurveTo((x + 3*previousX) / 4, previousY,(x + previousX) / 2, (y + previousY) / 2);
+      this.snowPile.quadraticCurveTo((3*x + previousX) / 4, y, x, y);
     })
   };
 
