@@ -49,13 +49,13 @@ let initialize = () => {
   });
   serverTalk(app.stage)
   let glContext = app.renderer.context.gl
-  // fallenSnow = new FallenSnow(app, glContext);
+  fallenSnow = new FallenSnow(app, glContext);
 
 
 // The application will create a canvas element for you that you
 // can then insert into the DOM.
   document.body.appendChild(app.view);
-  let valentine = new Valentine(app.stage)
+  let snowflake = new Snowflake(app.stage)
 
 
   let previousClickTime = new Date().valueOf();
@@ -69,17 +69,17 @@ let initialize = () => {
 
   let onTap = (point) => {
     if (isDoubleClick()) {
-      valentine.fillSnowflake(point);
-    } else if (valentine.isFinished) {
+      snowflake.fillSnowflake(point);
+    } else if (snowflake.isFinished) {
 
     } else {
-      valentine.addLine(point);
+      snowflake.addLine(point);
       console.log(point)
     }
   }
   let onMove = (point) => {
-    if (valentine.points.length > 0) {
-      valentine.previewLine(point);
+    if (snowflake.points.length > 0) {
+      snowflake.previewLine(point);
     }
   }
   app.view.addEventListener("mousedown", (event) => {
@@ -100,17 +100,17 @@ let initialize = () => {
   })
 
   window.onGoButtonPress = () => {
-    valentine.animate()
-    socket.emit("upload snowflake", valentine.points)
-    previousSnowflakePoints = valentine.points
-    valentine = new Valentine(app.stage);
+    snowflake.animate()
+    socket.emit("upload snowflake", snowflake.points)
+    previousSnowflakePoints = snowflake.points
+    snowflake = new snowflake(app.stage);
     let instructions = document.getElementsByClassName("instructions")[0]
     instructions.style = "display:none"
 
   }
   window.onDeleteButtonPress = () => {
-    app.stage.removeChild(valentine.snowflakeContainer);
-    valentine = new Valentine(app.stage, window.innerWidth, window.innerHeight);
+    app.stage.removeChild(snowflake.snowflakeContainer);
+    snowflake = new snowflake(app.stage, window.innerWidth, window.innerHeight);
   }
 }
 
