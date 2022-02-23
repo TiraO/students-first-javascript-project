@@ -14,7 +14,7 @@ class Snowflake {
     while (branchCount < 12) {
       let branch = new PIXI.Graphics();
       branch.rotation = branchCount * 2 * Math.PI / 12;
-      branch.lineStyle(2, 0xFF0000, 0.8);
+      branch.lineStyle(2, 0xFFFFFF, 0.8);
       if (branchCount % 2 == 1) {
         branch.scale.x = -1;
       }
@@ -27,7 +27,7 @@ class Snowflake {
     while (branchCount < 12) {
       let branch = new PIXI.Graphics();
       branch.rotation = branchCount * 2 * Math.PI / 12;
-      branch.lineStyle(2, 0xFF0000, 0.8);
+      branch.lineStyle(2, 0xFFFFFF, 0.8);
       if (branchCount % 2 == 1) {
         branch.scale.x = -1;
       }
@@ -73,7 +73,7 @@ class Snowflake {
     let branchIndex = 0;
     while (branchIndex < this.previewBranches.length) {
       this.previewBranches[branchIndex].clear();
-      this.previewBranches[branchIndex].lineStyle(2, 0xF67AC1, 0.8);
+      this.previewBranches[branchIndex].lineStyle(2, 0xFFFFFF, 0.8);
       this.previewBranches[branchIndex].moveTo(previousPoint.x, previousPoint.y);
       this.previewBranches[branchIndex].lineTo(point.x, point.y);
       branchIndex = branchIndex + 1;
@@ -130,8 +130,8 @@ class Snowflake {
     let branchIndex = 0
     while (branchIndex < this.branches.length) {
       this.branches[branchIndex].clear();
-      this.branches[branchIndex].lineStyle(2, 0xFF0000, 0.8);
-      this.branches[branchIndex].beginFill(0xFFC0CB, 0.9);
+      this.branches[branchIndex].lineStyle(2, 0xFFFFFF, 0.8);
+      this.branches[branchIndex].beginFill(0xFFFFFF, 0.9);
       this.branches[branchIndex].moveTo(this.points[0].x, this.points[0].y);
       this.points.forEach((point) => {
         this.branches[branchIndex].lineTo(point.x, point.y);
