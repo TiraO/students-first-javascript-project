@@ -5,6 +5,7 @@ class Snowflake {
   constructor(stage) {
     this.stage = stage
     this.isFinished = false
+    this.hasCrumpled = false;
     this.snowflakeContainer = new PIXI.Container();
     stage.addChild(this.snowflakeContainer);
     this.branches = []
@@ -155,11 +156,8 @@ class Snowflake {
     let snowflakeTouchesBottom = (this.snowflakeContainer.position.y >= stageHeight)
         && (this.snowflakeContainer.position.y < stageHeight + this.velocity / frameRate)
 
-    if (snowflakeTouchesBottom) {
+    fallenSnow.handleSnowflake(this);
 
-      fallenSnow.crumpleSnowflake(this)
-
-    }
     let snowflakeBelowBottom = this.snowflakeContainer.position.y >= stageHeight + this.snowflakeSize.height
     if (snowflakeBelowBottom) {
       this.moveToTop();
@@ -181,6 +179,7 @@ class Snowflake {
   }
 
   moveToTop = () => {
+    this.hasCrumpled = false;
     let snowflakeX = Math.random() * stageWidth
     this.snowflakeContainer.position.y = -1 * this.snowflakeSize.height
     this.snowflakeContainer.position.x = snowflakeX

@@ -103,7 +103,7 @@ let initialize = () => {
     snowflake.animate()
     socket.emit("upload snowflake", snowflake.points)
     previousSnowflakePoints = snowflake.points
-    snowflake = new snowflake(app.stage);
+    snowflake = new Snowflake(app.stage);
     let instructions = document.getElementsByClassName("instructions")[0]
     instructions.style = "display:none"
 
