@@ -50,8 +50,8 @@ Example.climbingWall = function() {
   Composite.add(world, [body, constraint]);
 
   // add revolute multi-body constraint
-  let bodyHeight = 200;
-  let bodyWidth = 100;
+  let bodyHeight = 140;
+  let bodyWidth = 90;
   var body = Bodies.rectangle(500, 400, bodyHeight, bodyWidth, { collisionFilter: { group: -1 } });
   var head = Bodies.circle(600, 400, 20, { collisionFilter: { group: -1 } });
 
@@ -104,9 +104,64 @@ Example.climbingWall = function() {
     pointB: {x: 0, y: -armPartLength/2},
     length: 0
   });
+  var leftUpperArm = Bodies.rectangle(500,400, 20, armPartLength, { collisionFilter: { group: -1 }});
+  let upperLeftArmConstraint = Constraint.create({
+    bodyA: body,
+    bodyB: leftUpperArm,
+    pointA: {x: -bodyHeight/2, y: bodyWidth/2},
+    pointB: {x: 0, y: -armPartLength/2},
+    length: 0
+  });
+  var leftForearm = Bodies.rectangle(500,400, 20, armPartLength, { collisionFilter: { group: -1 }});
+  let lowerLeftArmConstraint = Constraint.create({
+    bodyA: leftUpperArm,
+    bodyB: leftForearm,
+    pointA: {x: 0, y: armPartLength/2},
+    pointB: {x: 0, y: -armPartLength/2},
+    length: 0
+  });
+  
+  let legPartLength = 120;
+  var rightUpperLeg = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
+  let upperLegConstraint = Constraint.create({
+    bodyA: body,
+    bodyB: rightUpperLeg,
+    pointA: {x: bodyHeight/2, y: -bodyWidth/2},
+    pointB: {x: 0, y: -legPartLength/2},
+    length: 0
+  });
+  var rightShin = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
+  let lowerLegConstraint = Constraint.create({
+    bodyA: rightUpperLeg,
+    bodyB: rightShin,
+    pointA: {x: 0, y: legPartLength/2},
+    pointB: {x: 0, y: -legPartLength/2},
+    length: 0
+  });
+  var leftUpperLeg = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
+  let upperLeftLegConstraint = Constraint.create({
+    bodyA: body,
+    bodyB: leftUpperLeg,
+    pointA: {x: bodyHeight/2, y: bodyWidth/2},
+    pointB: {x: 0, y: -legPartLength/2},
+    length: 0
+  });
+  var leftShin = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
+  let lowerLeftLegConstraint = Constraint.create({
+    bodyA: leftUpperLeg,
+    bodyB: leftShin,
+    pointA: {x: 0, y: legPartLength/2},
+    pointB: {x: 0, y: -legPartLength/2},
+    length: 0
+  });
   Composite.add(world, [body, head,
     neckConstraint,neckConstraint2, neckConstraint3,
-    rightForearm, rightUpperArm, upperArmConstraint, lowerArmConstraint]);
+    rightForearm, rightUpperArm, upperArmConstraint, lowerArmConstraint,
+    leftForearm, leftUpperArm, upperLeftArmConstraint, lowerLeftArmConstraint,
+    rightShin, rightUpperLeg, upperLegConstraint, lowerLegConstraint,
+    leftShin, leftUpperLeg, upperLeftLegConstraint, lowerLeftLegConstraint,
+
+  ]);
 
 
   Composite.add(world, [
