@@ -88,11 +88,12 @@ Example.climbingWall = function() {
 
   });
   let armPartLength = 100;
+  let shoulderInset = 8;
   var rightUpperArm = Bodies.rectangle(500,400, 20, armPartLength, { collisionFilter: { group: -1 }});
   let upperArmConstraint = Constraint.create({
     bodyA: body,
     bodyB: rightUpperArm,
-    pointA: {x: -bodyHeight/2, y: -bodyWidth/2},
+    pointA: {x: -bodyHeight/2 + shoulderInset, y: -bodyWidth/2 + shoulderInset},
     pointB: {x: 0, y: -armPartLength/2},
     length: 0
   });
@@ -108,7 +109,7 @@ Example.climbingWall = function() {
   let upperLeftArmConstraint = Constraint.create({
     bodyA: body,
     bodyB: leftUpperArm,
-    pointA: {x: -bodyHeight/2, y: bodyWidth/2},
+    pointA: {x: -bodyHeight/2 + shoulderInset, y: bodyWidth/2 - shoulderInset},
     pointB: {x: 0, y: -armPartLength/2},
     length: 0
   });
@@ -122,12 +123,14 @@ Example.climbingWall = function() {
   });
   
   let legPartLength = 120;
-  var rightUpperLeg = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
+  let legInset = 20;
+  let thighWidth = 40;
+  var rightUpperLeg = Bodies.rectangle(500,400, thighWidth, legPartLength, { collisionFilter: { group: -1 }});
   let upperLegConstraint = Constraint.create({
     bodyA: body,
     bodyB: rightUpperLeg,
-    pointA: {x: bodyHeight/2, y: -bodyWidth/2},
-    pointB: {x: 0, y: -legPartLength/2},
+    pointA: {x: bodyHeight/2, y: -bodyWidth/2 + legInset},
+    pointB: {x: 0, y: -legPartLength/2 + legInset},
     length: 0
   });
   var rightShin = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
@@ -138,12 +141,12 @@ Example.climbingWall = function() {
     pointB: {x: 0, y: -legPartLength/2},
     length: 0
   });
-  var leftUpperLeg = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
+  var leftUpperLeg = Bodies.rectangle(500,400, thighWidth, legPartLength, { collisionFilter: { group: -1 }});
   let upperLeftLegConstraint = Constraint.create({
     bodyA: body,
     bodyB: leftUpperLeg,
-    pointA: {x: bodyHeight/2, y: bodyWidth/2},
-    pointB: {x: 0, y: -legPartLength/2},
+    pointA: {x: bodyHeight/2, y: bodyWidth/2 - legInset},
+    pointB: {x: 0, y: -legPartLength/2  + legInset},
     length: 0
   });
   var leftShin = Bodies.rectangle(500,400, 20, legPartLength, { collisionFilter: { group: -1 }});
@@ -192,6 +195,31 @@ Example.climbingWall = function() {
   Events.on(mouseConstraint, 'mouseup', function(event) {
     var mousePosition = event.mouse.position;
     console.log('mouseup at ' + mousePosition.x + ' ' + mousePosition.y);
+
+    let Bounds = Matter.Bounds;
+    let Detector = Matter.Detector;
+    let Vertices = Matter.Vertices;
+
+    let movedDist = Math.hypot(mousePosition.x - event.mouse.mousedownPosition.x, mousePosition.y - event.mouse.mousedownPosition.y);
+    console.log('moved dist', movedDist)
+    if(movedDist == 0){
+      // clicking also removes the doll pin
+      for (let i = 0; i < world.bodies.length; i++) {
+        body = world.bodies[i];
+        if (Bounds.contains(body.bounds, mouse.position)
+          && Detector.canCollide(body.collisionFilter, mouseConstraint.collisionFilter)) {
+          for (let j = body.parts.length > 1 ? 1 : 0; j < body.parts.length; j++) {
+            let part = body.parts[j];
+            if (Vertices.contains(part.vertices, mouse.position)) {
+              if(dollPins[part.id]) {
+                Composite.remove(world, dollPins[part.id]);
+                dollPins[part.id] = null;
+              }
+            }
+          }
+        }
+      }
+    }
   });
 
   // an example of using mouse events on a mouse
