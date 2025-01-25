@@ -35,29 +35,7 @@ Example.climbingWall = function() {
   var runner = Runner.create();
   Runner.run(runner, engine);
 
-  // // add stiff global constraint
-  // var body = Bodies.polygon(150, 200, 5, 30);
-  //
-  // var constraint = Constraint.create({
-  //   pointA: { x: 150, y: 100 },
-  //   bodyB: body,
-  //   pointB: { x: -10, y: -10 }
-  // });
-  //
-  // Composite.add(world, [body, constraint]);
-  //
-  // // add soft global constraint
-  // var body = Bodies.polygon(280, 100, 3, 30);
-  //
-  // var constraint = Constraint.create({
-  //   pointA: { x: 280, y: 120 },
-  //   bodyB: body,
-  //   pointB: { x: -10, y: -7 },
-  //   stiffness: 0.001
-  // });
-  //
-  // Composite.add(world, [body, constraint]);
-  //
+
   // // add damped soft global constraint
   var body = Bodies.polygon(400, 100, 4, 30);
 
@@ -71,18 +49,6 @@ Example.climbingWall = function() {
 
   Composite.add(world, [body, constraint]);
 
-  // add revolute constraint
-  // var body = Bodies.rectangle(600, 200, 200, 20);
-  // var ball = Bodies.circle(550, 150, 20);
-  //
-  // var constraint = Constraint.create({
-  //   pointA: { x: 600, y: 200 },
-  //   bodyB: body,
-  //   length: 0
-  // });
-  //
-  // Composite.add(world, [body, ball, constraint]);
-
   // add revolute multi-body constraint
   let bodyHeight = 200;
   let bodyWidth = 100;
@@ -91,14 +57,36 @@ Example.climbingWall = function() {
 
   var neckConstraint = Constraint.create({
     bodyA: body,
-    pointA: {x: -1*bodyHeight/2 - 10, y:0},
+    pointA: {x: -1*bodyHeight/2 - 10, y:5},
     length: 30,
     bodyB: head,
     // angularStiffness: 1,
+    stiffness: 0.1,
     angle: 0
 
   });
+  var neckConstraint2 = Constraint.create({
+    bodyA: body,
+    pointA: {x: -1*bodyHeight/2 - 10, y:-5},
+    length: 30,
+    bodyB: head,
+    // angularStiffness: 1,
+    stiffness: 0.1,
 
+    angle: 0
+
+  });
+  var neckConstraint3 = Constraint.create({
+    bodyA: body,
+    pointA: {x: -1*bodyHeight/2, y:0},
+    length: 60,
+    bodyB: head,
+    // angularStiffness: 1,
+    stiffness: 0.1,
+
+    angle: 0
+
+  });
   let armPartLength = 100;
   var rightUpperArm = Bodies.rectangle(500,400, 20, armPartLength, { collisionFilter: { group: -1 }});
   let upperArmConstraint = Constraint.create({
@@ -116,7 +104,9 @@ Example.climbingWall = function() {
     pointB: {x: 0, y: -armPartLength/2},
     length: 0
   });
-  Composite.add(world, [body, head, neckConstraint, rightForearm, rightUpperArm, upperArmConstraint, lowerArmConstraint]);
+  Composite.add(world, [body, head,
+    neckConstraint,neckConstraint2, neckConstraint3,
+    rightForearm, rightUpperArm, upperArmConstraint, lowerArmConstraint]);
 
 
   Composite.add(world, [
@@ -164,10 +154,20 @@ Example.climbingWall = function() {
     console.log('enddrag', event);
     let movedDist = Math.hypot(event.mouse.mousedownPosition.x - event.mouse.mouseupPosition.x, event.mouse.mousedownPosition.y - event.mouse.mouseupPosition.y);
     if(movedDist > 2) {
+      let bodyOffset =  {
+        x: event.mouse.position.x - event.body.position.x,
+        y: event.mouse.position.y - event.body.position.y
+      }
+
+      let pointOnBody = {
+        x: bodyOffset.x,
+        y: bodyOffset.y
+      }
+
       let constraint = Constraint.create({
         pointA: {x: event.mouse.position.x, y: event.mouse.position.y},
         bodyB: event.body,
-        //   pointB: { x: -10, y: -10 }
+        pointB: pointOnBody
       });
 
       dollPins[event.body.id] = constraint;
