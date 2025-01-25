@@ -1,6 +1,9 @@
 // from Matter-js Github
 var Example = Example || {};
 
+const clamp = (number, min, max)=>{
+ return Math.min(Math.max(number, min), max);
+}
 Example.climbingWall = function() {
   var Engine = Matter.Engine,
     Render = Matter.Render,
@@ -247,6 +250,34 @@ Example.climbingWall = function() {
         y: bodyOffset.y
       }
 
+      let body = event.body;
+      let pinLocationInside = false;
+      if (Matter.Bounds.contains(body.bounds, mouse.position)
+        && Matter.Detector.canCollide(body.collisionFilter, mouseConstraint.collisionFilter)) {
+        // for (let j = body.parts.length > 1 ? 1 : 0; j < body.parts.length; j++) {
+        //   let part = body.parts[j];
+        //   if (Vertices.contains(part.vertices, mouse.position)) {
+           pinLocationInside = true;
+        //   }
+        // }
+      }
+      if(!pinLocationInside) {
+        console.log('clamping pin into body bounds');
+        let localBounds = {
+          min: {
+            x: body.bounds.min.x - body.position.x,
+            y: body.bounds.min.y - body.position.y,
+          },
+          max: {
+            x: body.bounds.max.x - body.position.x,
+            y: body.bounds.max.y - body.position.y,
+          }
+        }
+        pointOnBody = {
+          x: clamp(pointOnBody.x,localBounds.min.x,localBounds.max.x),
+          y: clamp(pointOnBody.y,localBounds.min.y,localBounds.max.y)
+        }
+      }
       let constraint = Constraint.create({
         pointA: {x: event.mouse.position.x, y: event.mouse.position.y},
         bodyB: event.body,
