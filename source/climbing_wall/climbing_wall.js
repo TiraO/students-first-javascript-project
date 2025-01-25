@@ -30,7 +30,21 @@ class ClimberControls {
   }
 
   selectLimb(limbName) {
-    this.selectedLimb = limbName;
+    if(this.selectableLimbs.includes(limbName)){
+      this.selectedLimb = limbName;
+      console.log(this.selectedLimb, 'selected');
+    } else {
+      let slot = _.findWhere(climber.skeleton.slots,(slot)=>{ return slot.data.name == limbName});
+      console.log(slot, 'slot');
+      let parent = slot.parent
+      if(this.selectableLimbs.includes(parent)) {
+        this.selectedLimb = parent;
+        console.log(this.selectedLimb, 'selected (parent)');
+
+      } else {
+        console.log(limbName, 'not selectable')
+      }
+    }
   }
 
   deselectLimb() {
@@ -44,7 +58,7 @@ class ClimberControls {
       x: mouse.x - shoulder.x,
       y: mouse.y - shoulder.y
     }
-    // !! spine has backwards angles.
+    // !! spine has backwards angles sometimes?.
     let shoulderAngleRadians = Math.atan2(shoulderOffset.y, shoulderOffset.x) - 4.36;
     let armLength = 90;
     let upperArm = climber.skeleton.findSlot(this.selectedLimb);
@@ -54,10 +68,13 @@ class ClimberControls {
       let upperArmLength = armLength / 2;
       let armBendRadians = Math.acos((shoulderToTarget / 2) / upperArmLength);
       upperArm.bone.rotation += 2 * radiansToRotation(armBendRadians);
-      upperArm.bone.children[0].rotation = -2 * radiansToRotation(armBendRadians)
+      if(upperArm.bone.children.length) {
+        upperArm.bone.children[0].rotation = -2 * radiansToRotation(armBendRadians)
+      }
     }
   }
 }
+
 
 let initialize = () => {
   const app = new PIXI.Application();
@@ -89,7 +106,7 @@ let initialize = () => {
     // climber.state.setEmptyAnimation(1, 10);
 
     app.stage.addChild(climber);
-
+window.climber = climber
     console.log("slots", climber.skeleton.slots.map(slot => slot.data.name));
     window.climber = climber;
     climber.skeleton.findSlot("head").bone.scaleX = 0.5
@@ -110,7 +127,11 @@ let initialize = () => {
 
     app.stage.on('pointertap', (event) => {
       let mouse = event.data.global;
-      let hitLimb = getHitLimb(climber, mouse);
+      let hitLimb;
+      try {
+        hitLimb = getHitLimb(climber, mouse);
+      } catch (e) {
+      }
       if (hitLimb) {
         climberControls.clickLimb(hitLimb)
       } else {

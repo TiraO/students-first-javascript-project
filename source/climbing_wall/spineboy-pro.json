@@ -307,51 +307,7 @@
 	{ "name": "muzzle-ring4", "bone": "muzzle-ring4", "color": "d8baffff", "blend": "additive" }
 ],
 "ik": [
-	{
-		"name": "aim-ik",
-		"order": 12,
-		"bones": [ "rear-upper-arm" ],
-		"target": "crosshair",
-		"mix": 0
-	},
-	{
-		"name": "aim-torso-ik",
-		"order": 7,
-		"bones": [ "aim-constraint-target" ],
-		"target": "crosshair"
-	},
-	{
-		"name": "board-ik",
-		"order": 0,
-		"bones": [ "hoverboard-controller" ],
-		"target": "board-ik"
-	},
-	{
-		"name": "front-foot-ik",
-		"order": 5,
-		"bones": [ "front-foot" ],
-		"target": "front-foot-target"
-	},
-	{
-		"name": "front-leg-ik",
-		"order": 3,
-		"bones": [ "front-thigh", "front-shin" ],
-		"target": "front-leg-target",
-		"bendPositive": false
-	},
-	{
-		"name": "rear-foot-ik",
-		"order": 6,
-		"bones": [ "rear-foot" ],
-		"target": "rear-foot-target"
-	},
-	{
-		"name": "rear-leg-ik",
-		"order": 4,
-		"bones": [ "rear-thigh", "rear-shin" ],
-		"target": "rear-leg-target",
-		"bendPositive": false
-	}
+
 ],
 "transform": [
 	{
