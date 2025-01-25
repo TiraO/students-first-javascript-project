@@ -11,7 +11,8 @@ Example.climbingWall = function() {
     MouseConstraint = Matter.MouseConstraint,
     Mouse = Matter.Mouse,
     Composite = Matter.Composite,
-    Bodies = Matter.Bodies;
+    Bodies = Matter.Bodies,
+    Events = Matter.Events;
 
   // create engine
   var engine = Engine.create(),
@@ -116,48 +117,7 @@ Example.climbingWall = function() {
     length: 0
   });
   Composite.add(world, [body, head, neckConstraint, rightForearm, rightUpperArm, upperArmConstraint, lowerArmConstraint]);
-  //
-  // // add stiff multi-body constraint
-  // var bodyA = Bodies.polygon(100, 400, 6, 20);
-  // var bodyB = Bodies.polygon(200, 400, 1, 50);
-  //
-  // var constraint = Constraint.create({
-  //   bodyA: bodyA,
-  //   pointA: { x: -10, y: -10 },
-  //   bodyB: bodyB,
-  //   pointB: { x: -10, y: -10 }
-  // });
-  //
-  // Composite.add(world, [bodyA, bodyB, constraint]);
-  //
-  // // add soft global constraint
-  // var bodyA = Bodies.polygon(300, 400, 4, 20);
-  // var bodyB = Bodies.polygon(400, 400, 3, 30);
-  //
-  // var constraint = Constraint.create({
-  //   bodyA: bodyA,
-  //   pointA: { x: -10, y: -10 },
-  //   bodyB: bodyB,
-  //   pointB: { x: -10, y: -7 },
-  //   stiffness: 0.001
-  // });
-  //
-  // Composite.add(world, [bodyA, bodyB, constraint]);
-  //
-  // // add damped soft global constraint
-  // var bodyA = Bodies.polygon(500, 400, 6, 30);
-  // var bodyB = Bodies.polygon(600, 400, 7, 60);
-  //
-  // var constraint = Constraint.create({
-  //   bodyA: bodyA,
-  //   pointA: { x: -10, y: -10 },
-  //   bodyB: bodyB,
-  //   pointB: { x: -10, y: -10 },
-  //   stiffness: 0.001,
-  //   damping: 0.1
-  // });
-  //
-  // Composite.add(world, [bodyA, bodyB, constraint]);
+
 
   Composite.add(world, [
     // walls
@@ -179,6 +139,42 @@ Example.climbingWall = function() {
         }
       }
     });
+
+
+  let dollPins = {};
+
+  // an example of using mouse events on a mouse
+  Events.on(mouseConstraint, 'mouseup', function(event) {
+    var mousePosition = event.mouse.position;
+    console.log('mouseup at ' + mousePosition.x + ' ' + mousePosition.y);
+  });
+
+  // an example of using mouse events on a mouse
+  Events.on(mouseConstraint, 'startdrag', function(event) {
+    console.log('startdrag', event);
+    if(dollPins[event.body.id]) {
+      Composite.remove(world, dollPins[event.body.id]);
+      dollPins[event.body.id] = null;
+    }
+  });
+
+  // an example of using mouse events on a mouse
+  Events.on(mouseConstraint, 'enddrag', function(event) {
+
+    console.log('enddrag', event);
+    let movedDist = Math.hypot(event.mouse.mousedownPosition.x - event.mouse.mouseupPosition.x, event.mouse.mousedownPosition.y - event.mouse.mouseupPosition.y);
+    if(movedDist > 2) {
+      let constraint = Constraint.create({
+        pointA: {x: event.mouse.position.x, y: event.mouse.position.y},
+        bodyB: event.body,
+        //   pointB: { x: -10, y: -10 }
+      });
+
+      dollPins[event.body.id] = constraint;
+      Composite.add(world, constraint);
+    }
+  });
+
 
   Composite.add(world, mouseConstraint);
 
@@ -204,9 +200,9 @@ Example.climbingWall = function() {
   };
 };
 
-Example.constraints.title = 'Constraints';
-Example.constraints.for = '>=0.14.2';
+Example.climbingWall.title = 'Climbing Wall';
+Example.climbingWall.for = '>=0.14.2';
 
 if (typeof module !== 'undefined') {
-  module.exports = Example.constraints;
+  module.exports = Example.climbingWall;
 }
